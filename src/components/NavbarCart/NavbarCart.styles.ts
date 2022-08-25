@@ -14,6 +14,8 @@ export const Wrapper = styled.div<WrapperTypes>`
     box-shadow: 0 0 .3rem ${({theme}) => theme.color.bgcartshadow};
     z-index: 1;
     padding: 0 30px;
+    transition: transform .2s;
+
 
     ${({theme}) => theme.mq.desktop}{
         padding: 0 4rem;

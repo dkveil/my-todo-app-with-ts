@@ -20,6 +20,7 @@ export const Hamburger = styled.div<ButtonStylesProps>`
         background-color: ${({ theme }) => theme.color.font};
         z-index: 2;
         border-radius: 4px;
+        transition: transform 0.2s;
 
         ${(props) => {
             if (props.active) {
@@ -40,6 +41,7 @@ export const Hamburger = styled.div<ButtonStylesProps>`
             height: 2px;
             background-color: ${({ theme }) => theme.color.font};
             border-radius: 4px;
+            transition: transform 0.2s;
         }
         ::before {
             top: ${(props) => (props.active ? "0" : "8px")};
