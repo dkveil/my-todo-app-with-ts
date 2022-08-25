@@ -5,6 +5,7 @@ export const AppWrapper = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     width: 100vw;
+    min-height: 100vh;
 
     ${({theme}) => theme.mq.desktop}{
         flex-direction: row;

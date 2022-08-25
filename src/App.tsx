@@ -6,13 +6,15 @@ import NavbarCart from './components/NavbarCart';
 import Navbar from './components/Navbar/index';
 import { AppWrapper } from './containers/container';
 import styled from 'styled-components';
+import Home from './components/Pages/Home';
 
 const Test = styled.div`
     display: flex;
     justify-content: center;
     flex-grow: 1;
     background-color: ${({theme}) => theme.color.bgapp};
-`;
+`
+;
 
 const App = () => {
   return (
@@ -20,9 +22,12 @@ const App = () => {
       <GlobalStyles />
       <AppWrapper>
         <NavbarCart />
-        <Navbar />
         <Routes>
-          <Route path="/" element={<Test>App</Test>}/>
+          <Route path="/" element={
+            <Test>
+              <Home />
+            </Test>
+        }/>
         </Routes>
       </AppWrapper>
     </ThemeProvider>

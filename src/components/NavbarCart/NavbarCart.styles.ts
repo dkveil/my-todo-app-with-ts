@@ -6,12 +6,13 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100vh;
     background-color: ${({theme}) => theme.color.bgcart};
-    padding: 0 4rem;
     transform: translateX(-100%);
     box-shadow: 0 0 .3rem ${({theme}) => theme.color.bgcartshadow};
     z-index: 1;
+    padding: 0 30px;
 
     ${({theme}) => theme.mq.desktop}{
+        padding: 0 4rem;
         position: static;
         width: 400px;
         transform: none;
