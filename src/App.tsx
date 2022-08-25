@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/index';
 import { AppWrapper } from './containers/container';
 import styled from 'styled-components';
 import Home from './components/Pages/Home';
+import GlobalContextProvider from './context/GlobalContext';
 
 const Test = styled.div`
     display: flex;
@@ -18,19 +19,21 @@ const Test = styled.div`
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <AppWrapper>
-        <NavbarCart />
-        <Routes>
-          <Route path="/" element={
-            <Test>
-              <Home />
-            </Test>
-        }/>
-        </Routes>
-      </AppWrapper>
-    </ThemeProvider>
+    <GlobalContextProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <AppWrapper>
+          <NavbarCart />
+          <Routes>
+            <Route path="/" element={
+              <Test>
+                <Home />
+              </Test>
+          }/>
+          </Routes>
+        </AppWrapper>
+      </ThemeProvider>
+    </GlobalContextProvider>
   );
 }
 

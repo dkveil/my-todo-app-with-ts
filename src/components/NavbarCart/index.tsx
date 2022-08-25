@@ -5,6 +5,7 @@ import {
     AiOutlineFolderOpen,
     AiOutlinePlusCircle,
 } from "react-icons/ai";
+import { useGlobalContext } from '../../context/GlobalContext';
 
 const navitems = [
     {
@@ -30,8 +31,11 @@ const navitems = [
 ];
 
 const NavbarCart = () => {
+
+    const { barActive } = useGlobalContext()
+
     return (
-        <NavCart.Wrapper>
+        <NavCart.Wrapper opened={barActive}>
             <NavCart.LogoWrapper>
                 <NavCart.Logo to="/">
                     .my todo app

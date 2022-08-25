@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.div`
+type WrapperTypes = {
+    opened: boolean;
+}
+
+export const Wrapper = styled.div<WrapperTypes>`
     position: fixed;
     width: 100%;
     height: 100vh;
     background-color: ${({theme}) => theme.color.bgcart};
-    transform: translateX(-100%);
+    transform: ${(props) => props.opened ? 'translateX(0)': 'translateX(-100%)'};
     box-shadow: 0 0 .3rem ${({theme}) => theme.color.bgcartshadow};
     z-index: 1;
     padding: 0 30px;

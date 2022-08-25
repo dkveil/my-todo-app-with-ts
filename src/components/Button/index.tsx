@@ -4,22 +4,24 @@ import { ButtonStylesProps } from './Button.styles'
 
 interface ButtonProps extends ButtonStylesProps {
     buttontype: string;
+    onClickHandler: () => void;
 }
 
-const Button = ({buttontype, size, active}: ButtonProps) => {
-    switch (buttontype){
-        case 'hamburger':
+const Button = ({ buttontype, size, active, onClickHandler }: ButtonProps) => {
+    switch (buttontype) {
+        case "hamburger":
             return (
                 <Btn.Hamburger
-                size={size}
-                active={active}
+                    size={size}
+                    active={active}
+                    onClick={onClickHandler}
                 >
-                    <div/>
+                    <div />
                 </Btn.Hamburger>
-            )
+            );
         default:
-            return null
+            return null;
     }
-}
+};
 
 export default Button;
