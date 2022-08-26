@@ -5,7 +5,6 @@ type GlobalContextProviderTypes = {
 }
 
 type GlobalContextTypes = {
-    test: () => void;
     barActive: boolean;
     closeBar: () => void;
     openBar: () => void;
@@ -18,10 +17,6 @@ export const useGlobalContext = () => {
 }
 
 const GlobalContextProvider = ({ children }: GlobalContextProviderTypes) => {
-    const test = () => {
-        console.log("test");
-    };
-
     const [barActive, setBarActive] = React.useState<boolean>(false)
 
     const closeBar = () => setBarActive(false)
@@ -30,7 +25,6 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderTypes) => {
     return (
         <GlobalContext.Provider
             value={{
-                test,
                 barActive,
                 closeBar,
                 openBar

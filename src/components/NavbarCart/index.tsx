@@ -44,7 +44,7 @@ const NavbarCart = () => {
             <nav>
                 <NavCart.NavList>
                     {navitems.map(item => (
-                        <NavCart.NavItem id={item.name} onClick={closeBar}>
+                        <NavCart.NavItem key={item.name} id={item.name} onClick={closeBar}>
                             <NavCart.NavLink to={item.path}>
                                 {item.icon && item.icon}
                                 {item.name}

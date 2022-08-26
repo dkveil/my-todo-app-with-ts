@@ -1,17 +1,19 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid'
 
 type TasksContextProviderProps = {
     children: React.ReactNode
 };
 
 type taskProps = {
-    id: number;
+    id: string;
     name: string;
+    completed: boolean;
 }
 
 type TasksContextTypes = {
     tasks: taskProps[];
-    AddTask: (id: number, name: string) => void;
+    AddTask: (name: string) => void;
 };
 
 const TasksContext = React.createContext({} as TasksContextTypes)
@@ -25,11 +27,21 @@ interface taskAction extends taskProps {
 const taskReducer = (state: taskState, action: taskAction) => {
     switch(action.type){
         case 'ADD':
-            return [ ...state, { id: action.id, name: action.name }];
+            return [ ...state, {
+                id: action.id,
+                name: action.name,
+                completed: action.completed
+            }];
         case 'REMOVE':
-            return state;
+            return state.filter(task => task.id !== action.id);
         case 'EDIT':
-            return state;
+            return state.map(task => {
+                if(action.id === task.id){
+                    return { ...task }
+                } else {
+                    return task
+                }
+            });
         default:
             return state;
     }
@@ -41,12 +53,13 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const [tasks, dispatch] = React.useReducer(taskReducer, [])
 
-    const AddTask = (id: number, name: string) => {
+    const AddTask = (name: string) => {
         dispatch({
-            id,
+            id: uuidv4(),
             name,
-            type: 'ADD'
-        })
+            completed: false,
+            type: "ADD",
+        });
     }
 
     return (

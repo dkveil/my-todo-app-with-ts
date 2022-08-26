@@ -5,8 +5,9 @@ const TasksPage = () => {
     const { tasks, AddTask } = useTasksContext();
 
     const handleClick = () => {
-        AddTask(1, 'task')
+        AddTask('task')
     }
+    console.log(tasks)
 
     return (
         <>
