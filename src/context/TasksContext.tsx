@@ -11,32 +11,51 @@ type taskProps = {
 
 type TasksContextTypes = {
     tasks: taskProps[];
-    Test: () => void;
-}
-
+    AddTask: (id: number, name: string) => void;
+};
 
 const TasksContext = React.createContext({} as TasksContextTypes)
+
+type taskState = taskProps[]
+
+interface taskAction extends taskProps {
+    type: string
+}
+
+const taskReducer = (state: taskState, action: taskAction) => {
+    switch(action.type){
+        case 'ADD':
+            return [ ...state, { id: action.id, name: action.name }];
+        case 'REMOVE':
+            return state;
+        case 'EDIT':
+            return state;
+        default:
+            return state;
+    }
+};
 
 export const useTasksContext = () => React.useContext(TasksContext);
 
 const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
-    const [tasks, setTasks] = React.useState<taskProps[]>([
-        {
-            id: 1,
-            name: 'test'
-        }
-    ])
+    const [tasks, dispatch] = React.useReducer(taskReducer, [])
 
-    const Test = () => {
-        console.log('test')
+    const AddTask = (id: number, name: string) => {
+        dispatch({
+            id,
+            name,
+            type: 'ADD'
+        })
     }
 
     return (
-        <TasksContext.Provider value={{
-            Test,
-            tasks
-        }}>
+        <TasksContext.Provider
+            value={{
+                tasks,
+                AddTask
+            }}
+        >
             {children}
         </TasksContext.Provider>
     );
