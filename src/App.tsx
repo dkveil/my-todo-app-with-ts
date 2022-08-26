@@ -11,6 +11,7 @@ import AboutPage from "./pages/AboutPage";
 import TasksPage from "./pages/TasksPage";
 import AddTaskPage from "./pages/AddTaskPage";
 import GlobalContextProvider from "./context/GlobalContext";
+import TasksContextProvider from "./context/TasksContext";
 
 const Test = styled.div`
     display: flex;
@@ -22,21 +23,26 @@ const Test = styled.div`
 const App = () => {
     return (
         <GlobalContextProvider>
-            <ThemeProvider theme={theme}>
-                <GlobalStyles />
-                <AppWrapper>
-                    <NavbarCart />
-                    <Test>
-                        <Navbar />
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/about" element={<AboutPage />} />
-                            <Route path="/tasks" element={<TasksPage />} />
-                            <Route path="/add-task" element={<AddTaskPage />} />
-                        </Routes>
-                    </Test>
-                </AppWrapper>
-            </ThemeProvider>
+            <TasksContextProvider>
+                <ThemeProvider theme={theme}>
+                    <GlobalStyles />
+                    <AppWrapper>
+                        <NavbarCart />
+                        <Test>
+                            <Navbar />
+                            <Routes>
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/about" element={<AboutPage />} />
+                                <Route path="/tasks" element={<TasksPage />} />
+                                <Route
+                                    path="/add-task"
+                                    element={<AddTaskPage />}
+                                />
+                            </Routes>
+                        </Test>
+                    </AppWrapper>
+                </ThemeProvider>
+            </TasksContextProvider>
         </GlobalContextProvider>
     );
 };
