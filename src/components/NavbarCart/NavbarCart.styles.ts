@@ -57,6 +57,6 @@ export const NavLink = styled(Link)`
     text-decoration: none;
 
     &:hover{
-        color: ${({theme}) => theme.fonthover};
+        color: ${({theme}) => theme.color.fonthover};
     }
 `

@@ -32,7 +32,7 @@ const navitems = [
 
 const NavbarCart = () => {
 
-    const { barActive } = useGlobalContext()
+    const { barActive, closeBar } = useGlobalContext()
 
     return (
         <NavCart.Wrapper opened={barActive}>
@@ -44,7 +44,7 @@ const NavbarCart = () => {
             <nav>
                 <NavCart.NavList>
                     {navitems.map(item => (
-                        <NavCart.NavItem id={item.name}>
+                        <NavCart.NavItem id={item.name} onClick={closeBar}>
                             <NavCart.NavLink to={item.path}>
                                 {item.icon && item.icon}
                                 {item.name}
