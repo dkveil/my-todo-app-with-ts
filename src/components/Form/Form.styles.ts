@@ -4,6 +4,7 @@ import { theme } from '../../styles/theme'
 export type FieldType = {
     fieldtype: "text" | "textarea" | "date" | "select" | "checkbox";
     error?: boolean;
+    active?: boolean;
 }
 
 type InputType = {
@@ -31,6 +32,10 @@ export const Field = styled.div<FieldType>`
         if(props.error){
             return`
                 border: 2px solid red;
+            `
+        } else if(props.active){
+            return`
+                border: 2px solid ${theme.color.formactive};
             `
         } else {
             return`
@@ -81,6 +86,7 @@ export const Field = styled.div<FieldType>`
 type LabelType = {
     labeltype?: "textarea" | "checkbox";
     error?: boolean;
+    active?: boolean;
 }
 
 export const Label = styled.div<LabelType>`
@@ -93,9 +99,13 @@ export const Label = styled.div<LabelType>`
             return`
                 color: red;
             `
-        } else {
+        } else if(props.active){
             return`
-                color:${theme.color.formfieldborder};
+                color: ${theme.color.formactive};
+            `
+        } else{
+            return`
+                color: ${theme.color.formfieldborder};
             `
         }
     }}
@@ -209,6 +219,6 @@ export const Button = styled.button`
     }
 
     :active{
-        background-color: ${theme.color.formbtnbgactive};
+        background-color: ${theme.color.formactive};
     }
 `

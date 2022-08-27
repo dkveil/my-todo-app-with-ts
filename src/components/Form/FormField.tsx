@@ -1,3 +1,4 @@
+import React from 'react';
 import { Field, Input, Label, ErrorMsg} from './Form.styles'
 
 type FormFieldTypes = {
@@ -15,10 +16,13 @@ type FormFieldTypes = {
 
 const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, onChangeHandler, error}: FormFieldTypes) => {
 
+    const [isFocused, setIsFocused] = React.useState<boolean>(false)
+
     return (
         <Field
         fieldtype={fieldtype}
         error={Boolean(error)}
+        active={isFocused}
         >
             <Input
                 inputtype={inputstyletype}
@@ -26,8 +30,10 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                 name={inputname}
                 onChange={onChangeHandler}
                 value={inputvalue}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
             />
-            {isLabel && <Label error={Boolean(error)}>{labelText}</Label>}
+            {isLabel && <Label error={Boolean(error)} active={isFocused}>{labelText}</Label>}
             {error && <ErrorMsg>{error}</ErrorMsg>}
         </Field>
     );

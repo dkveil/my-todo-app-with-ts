@@ -15,7 +15,7 @@ export const theme = {
         formfieldbg: 'white',
         formbtnbg: 'gray',
         formbtnbghover: 'darkgray',
-        formbtnbgactive: '#383838',
+        formactive: '#005be9',
         formbtnfont: 'white',
     },
     mq: {
