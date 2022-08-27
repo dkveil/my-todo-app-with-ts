@@ -46,7 +46,7 @@ const TaskForm = () => {
                 }
 
                 if(!values.title){
-                    errors.title = "Hey! I can add a task if you leave this field empty!"
+                    errors.title = "Hey! I can't add a task if you leave this field empty!"
                 }
 
                 return errors

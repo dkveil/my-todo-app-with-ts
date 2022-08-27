@@ -15,8 +15,11 @@ type FormFieldTypes = {
 
 const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, onChangeHandler, error}: FormFieldTypes) => {
 
-    return(
-        <Field fieldtype={fieldtype}>
+    return (
+        <Field
+        fieldtype={fieldtype}
+        error={Boolean(error)}
+        >
             <Input
                 inputtype={inputstyletype}
                 type={inputtype}
@@ -24,17 +27,10 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                 onChange={onChangeHandler}
                 value={inputvalue}
             />
-            {isLabel &&
-            (
-                <Label>{labelText}</Label>
-            )}
-            {error && (
-                <ErrorMsg>
-                    {error}
-                </ErrorMsg>
-            )}
+            {isLabel && <Label error={Boolean(error)}>{labelText}</Label>}
+            {error && <ErrorMsg>{error}</ErrorMsg>}
         </Field>
-    )
+    );
 }
 
 FormField.defaultProps = {

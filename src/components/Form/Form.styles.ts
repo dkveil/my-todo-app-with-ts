@@ -3,6 +3,7 @@ import { theme } from '../../styles/theme'
 
 export type FieldType = {
     fieldtype: "text" | "textarea" | "date" | "select" | "checkbox";
+    error?: boolean;
 }
 
 type InputType = {
@@ -21,10 +22,22 @@ export const Field = styled.div<FieldType>`
     position: relative;
     overflow: visible;
     border-radius: 12px;
-    border: 2px solid ${({theme}) => theme.color.formfieldborder};
+
     background-color: ${({theme}) => theme.colorformfieldbg};
     margin-bottom: 2rem;
     width: 520px;
+
+    ${(props) => {
+        if(props.error){
+            return`
+                border: 2px solid red;
+            `
+        } else {
+            return`
+                border: 2px solid ${theme.color.formfieldborder};
+            `
+        }
+    }}
 
     input, textarea, select {
         border-radius: 12px;
@@ -67,11 +80,25 @@ export const Field = styled.div<FieldType>`
 
 type LabelType = {
     labeltype?: "textarea" | "checkbox";
+    error?: boolean;
 }
 
 export const Label = styled.div<LabelType>`
 
     position: absolute;
+    color: ${theme.color.formfieldborder};
+
+    ${(props) => {
+        if(props.error){
+            return`
+                color: red;
+            `
+        } else {
+            return`
+                color:${theme.color.formfieldborder};
+            `
+        }
+    }}
 
     ${(props) => {
         switch(props.labeltype){
@@ -89,7 +116,6 @@ export const Label = styled.div<LabelType>`
                     left: 8px;
                     background-color: ${theme.color.bgapp};
                     padding: 2px;
-                    color: ${theme.color.formfieldborder};
                 `
         }
     }}
