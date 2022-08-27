@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from '../../styles/theme'
 
-type FieldType = {
+export type FieldType = {
     fieldtype: "text" | "textarea" | "date" | "select" | "checkbox";
 }
 
@@ -19,13 +19,15 @@ export const Wrapper = styled.form`
 
 export const Field = styled.div<FieldType>`
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 12px;
     border: 2px solid ${({theme}) => theme.color.formfieldborder};
+    background-color: ${({theme}) => theme.colorformfieldbg};
     margin-bottom: 2rem;
     width: 520px;
 
     input, textarea, select {
+        border-radius: 12px;
         background-color: ${({theme}) => theme.colorformfieldbg};
         padding: 13px 15px;
     }
@@ -63,13 +65,35 @@ export const Field = styled.div<FieldType>`
     }}
 `
 
-export const Label = styled.div`
-    display: none;
+type LabelType = {
+    labeltype?: "textarea" | "checkbox";
+}
+
+export const Label = styled.div<LabelType>`
+
     position: absolute;
-    font-size: 16px;
-    left: 17px;
-    top: 18px;
-    color: ${({theme}) => theme.color.font};
+
+    ${(props) => {
+        switch(props.labeltype){
+            case 'checkbox':
+                return`
+                    left: 45px;
+                    top: 48%;
+                    transform: translateY(-50%)
+                `
+            default:
+                return`
+                    font-size: 14px;
+                    top: -20%;
+                    top: ${props.labeltype === "textarea" ? "-10%" : "-20%"};
+                    left: 8px;
+                    background-color: white;
+                    padding: 2px;
+                    color: ${theme.color.formfieldborder};
+                `
+        }
+    }}
+
 `
 
 export const Input = styled.input<InputType>`

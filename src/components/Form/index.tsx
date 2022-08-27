@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { useTasksContext } from "../../context/TasksContext";
 import { v4 as uuidv4 } from "uuid";
 import * as Form from "./Form.styles";
+import FormField from './FormField'
 
 type FormModel = {
     title: string;
@@ -62,27 +63,26 @@ const TaskForm = () => {
 
                 return (
                     <Form.Wrapper onSubmit={handleSubmit}>
-                        <Form.Field fieldtype="text">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Input
-                                type="text"
-                                name="title"
-                                onChange={handleChange}
-                                value={values.title}
-                            />
-                        </Form.Field>
-
+                        <FormField
+                            fieldtype="text"
+                            inputtype="text"
+                            isLabel={true}
+                            inputname="title"
+                            inputvalue={values.title}
+                            labelText="Task title - *required"
+                            onChangeHandler={handleChange}
+                        />
                         <Form.Field fieldtype="textarea">
-                            <Form.Label>note</Form.Label>
                             <Form.TextArea
                                 name="note"
                                 onChange={handleChange}
                                 value={values.note}
-                            />
+                                />
+                            <Form.Label labeltype="textarea">Note</Form.Label>
                         </Form.Field>
 
                         <Form.Field fieldtype="select">
-                            <Form.Label>category</Form.Label>
+                            <Form.Label>Category</Form.Label>
                             <Form.Select
                                 name="category"
                                 onChange={handleChange}
@@ -146,7 +146,7 @@ const TaskForm = () => {
                                 type="checkbox"
                                 onChange={checkboxOnChange}
                             />
-                            <Form.Label>favorite?</Form.Label>
+                            <Form.Label labeltype="checkbox">favorite?</Form.Label>
                         </Form.Field>
 
                         <Form.Button type="submit">Add task</Form.Button>
