@@ -9,6 +9,7 @@ export const AppWrapper = styled.div`
 
     ${({theme}) => theme.mq.desktop}{
         flex-direction: row;
+        height: fit-content;
     }
 `
 

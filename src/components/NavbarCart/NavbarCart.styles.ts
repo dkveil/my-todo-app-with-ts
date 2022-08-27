@@ -21,6 +21,8 @@ export const Wrapper = styled.div<WrapperTypes>`
         padding: 0 4rem;
         position: static;
         width: 400px;
+        height: 100%;
+        min-height: 100vh;
         transform: none;
     }
 `

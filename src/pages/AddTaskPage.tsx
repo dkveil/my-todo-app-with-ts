@@ -2,7 +2,8 @@ import React from 'react'
 import { Formik } from "formik";
 import { useTasksContext } from './../context/TasksContext';
 import { v4 as uuidv4 } from "uuid";
-
+import * as Form from '../components/Form/Form.styles'
+import { Wrapper } from './../components/Navbar/Navbar.styles';
 
 type FormModel = {
     title: string;
@@ -17,7 +18,7 @@ const AddTaskPage = () => {
     const { AddTask } = useTasksContext()
 
     return (
-        <>
+        <div>
             <Formik<FormModel>
                 initialValues={{
                     title: "",
@@ -56,83 +57,101 @@ const AddTaskPage = () => {
                     }
 
                     return (
-                        <form onSubmit={handleSubmit}>
-                            <div>
-                                <label htmlFor="title">Title</label>
-                                <input
+                        <Form.Wrapper onSubmit={handleSubmit}>
+                            <Form.Field fieldtype="text">
+                                <Form.Label>Title</Form.Label>
+                                <Form.Input
                                     type="text"
                                     name="title"
-                                    placeholder="name"
                                     onChange={handleChange}
                                     value={values.title}
                                 />
-                            </div>
+                            </Form.Field>
 
-                            <div>
-                                <label htmlFor="note">note</label>
-                                <textarea
+                            <Form.Field fieldtype="textarea">
+                                <Form.Label>note</Form.Label>
+                                <Form.TextArea
                                     name="note"
-                                    placeholder="name"
                                     onChange={handleChange}
                                     value={values.note}
                                 />
-                            </div>
+                            </Form.Field>
 
-                            <div>
-                                <label htmlFor="category">category</label>
-                                <select
+                            <Form.Field fieldtype="select">
+                                <Form.Label>category</Form.Label>
+                                <Form.Select
                                     name="category"
                                     onChange={handleChange}
                                     value={values.category}
                                 >
-                                    <option value="default">default</option>
-                                    <option value="wish list">wish list</option>
-                                    <option value="personal">personal</option>
-                                    <option value="work">work</option>
-                                    <option value="shopping">shopping</option>
-                                    <option value="other">other</option>
-                                </select>
-                            </div>
+                                    <Form.Option value="default">
+                                        default
+                                    </Form.Option>
+                                    <Form.Option value="wish list">
+                                        wish list
+                                    </Form.Option>
+                                    <Form.Option value="personal">
+                                        personal
+                                    </Form.Option>
+                                    <Form.Option value="work">work</Form.Option>
+                                    <Form.Option value="shopping">
+                                        shopping
+                                    </Form.Option>
+                                    <Form.Option value="other">
+                                        other
+                                    </Form.Option>
+                                </Form.Select>
+                            </Form.Field>
 
-                            <div>
-                                <label htmlFor="deadline">Deadline</label>
-                                <input
+                            <Form.Field fieldtype="date">
+                                <Form.Label>Deadline</Form.Label>
+                                <Form.Input
                                     type="datetime-local"
                                     name="deadline"
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dateOnChange(e)}
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>
+                                    ) => dateOnChange(e)}
                                 />
-                            </div>
+                            </Form.Field>
 
-                            <div>
-                                <label htmlFor="priority">Priority</label>
-                                <select
+                            <Form.Field fieldtype="select">
+                                <Form.Label>Priority</Form.Label>
+                                <Form.Select
                                     name="priority"
                                     onChange={handleChange}
                                     value={values.priority}
                                 >
-                                    <option value="no priority">no priority</option>
-                                    <option value="low priority">low priority</option>
-                                    <option value="medium priority">
+                                    <Form.Option value="no priority">
+                                        no priority
+                                    </Form.Option>
+                                    <Form.Option value="low priority">
+                                        low priority
+                                    </Form.Option>
+                                    <Form.Option value="medium priority">
                                         medium priority
-                                    </option>
-                                    <option value="high priority">high priority</option>
-                                </select>
-                            </div>
+                                    </Form.Option>
+                                    <Form.Option value="high priority">
+                                        high priority
+                                    </Form.Option>
+                                </Form.Select>
+                            </Form.Field>
 
-                            <div>
-                                <input
-                                name="favorite"
-                                checked={values.favorite}
-                                type="checkbox"
-                                onChange={checkboxOnChange}
-                                />
-                            </div>
+                            <Form.Field fieldtype="checkbox">
+                                <Form.Input
+                                    inputtype='checkbox-star'
+                                    name="favorite"
+                                    checked={values.favorite}
+                                    type="checkbox"
+                                    onChange={checkboxOnChange}
+                                    />
+                                    <Form.Label>favorite?</Form.Label>
+                            </Form.Field>
 
-                            <button type="submit">test</button>
-                        </form>
-                )}}
+                            <Form.Button type="submit">Add task</Form.Button>
+                        </Form.Wrapper>
+                    );}}
             </Formik>
-        </>
+        </div>
     );
 };
 
