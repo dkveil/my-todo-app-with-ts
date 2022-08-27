@@ -1,4 +1,4 @@
-import { Field, Input, Label} from './Form.styles'
+import { Field, Input, Label, ErrorMsg} from './Form.styles'
 
 type FormFieldTypes = {
     fieldtype: "text" | "textarea" | "date" | "select" | "checkbox";
@@ -9,10 +9,12 @@ type FormFieldTypes = {
     inputname: string;
     inputvalue?: string | number | readonly string[];
     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    error?: string;
 };
 
 
-const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, onChangeHandler}: FormFieldTypes) => {
+const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, onChangeHandler, error}: FormFieldTypes) => {
+
     return(
         <Field fieldtype={fieldtype}>
             <Input
@@ -25,6 +27,11 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
             {isLabel &&
             (
                 <Label>{labelText}</Label>
+            )}
+            {error && (
+                <ErrorMsg>
+                    {error}
+                </ErrorMsg>
             )}
         </Field>
     )

@@ -40,8 +40,19 @@ const TaskForm = () => {
                     completed: false,
                 });
             }}
+            validate={(values) => {
+                let errors = {
+                    title: ""
+                }
+
+                if(!values.title){
+                    errors.title = "Hey! I can add a task if you leave this field empty!"
+                }
+
+                return errors
+            }}
         >
-            {({ handleSubmit, values, handleChange, setFieldValue }) => {
+            {({ handleSubmit, values, handleChange, setFieldValue, errors }) => {
                 const dateOnChange = (
                     e: React.ChangeEvent<HTMLInputElement>
                 ) => {
@@ -71,6 +82,7 @@ const TaskForm = () => {
                             inputvalue={values.title}
                             labelText="Task title - *required"
                             onChangeHandler={handleChange}
+                            error={errors.title}
                         />
                         <Form.Field fieldtype="textarea">
                             <Form.TextArea

@@ -28,7 +28,7 @@ export const Field = styled.div<FieldType>`
 
     input, textarea, select {
         border-radius: 12px;
-        background-color: ${({theme}) => theme.colorformfieldbg};
+        background-color: inherit;
         padding: 13px 15px;
     }
 
@@ -87,7 +87,7 @@ export const Label = styled.div<LabelType>`
                     top: -20%;
                     top: ${props.labeltype === "textarea" ? "-10%" : "-20%"};
                     left: 8px;
-                    background-color: white;
+                    background-color: ${theme.color.bgapp};
                     padding: 2px;
                     color: ${theme.color.formfieldborder};
                 `
@@ -110,7 +110,7 @@ export const Input = styled.input<InputType>`
                     :before{
                         top: -150%;
                         position: absolute;
-                        color: yellow;
+                        color: #bd9800;
                         content: "\\2605";
                         visibility: visible;
                     }
@@ -161,6 +161,11 @@ export const Select = styled.select`
 export const Option = styled.option`
     border: none;
     outline: none;
+`
+
+export const ErrorMsg = styled.div`
+    font-size: 14px;
+    color: red;
 `
 
 export const Button = styled.button`
