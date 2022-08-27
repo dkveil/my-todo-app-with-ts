@@ -1,11 +1,11 @@
+import React from 'react'
 import { Formik } from "formik";
 import { useTasksContext } from './../context/TasksContext';
-import DatePicker from 'react-datepicker'
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
 
 type FormModel = {
-    name: string;
+    title: string;
     category: string;
     note: string;
     deadline?: string;
@@ -20,7 +20,7 @@ const AddTaskPage = () => {
         <>
             <Formik<FormModel>
                 initialValues={{
-                    name: "",
+                    title: "",
                     category: "default",
                     note: "",
                     deadline: undefined,
@@ -28,8 +28,17 @@ const AddTaskPage = () => {
                     favorite: false,
                 }}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values));
-                    // AddTask(values.name)
+                    AddTask({
+                        id: uuidv4(),
+                        title: values.title,
+                        category: values.category,
+                        note: values.note,
+                        createdAt: new Date().toISOString(),
+                        deadline: values.deadline,
+                        priority: values.priority,
+                        favorite: values.favorite,
+                        completed: false,
+                    });
                 }}
             >
                 {({ handleSubmit, values, handleChange, setFieldValue }) => {
@@ -42,20 +51,20 @@ const AddTaskPage = () => {
                         }
                     }
 
-                    const checkboxOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+                    const checkboxOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                         setFieldValue("favorite", e.target.checked)
                     }
 
                     return (
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor="name">Title</label>
+                                <label htmlFor="title">Title</label>
                                 <input
                                     type="text"
-                                    name="name"
+                                    name="title"
                                     placeholder="name"
                                     onChange={handleChange}
-                                    value={values.name}
+                                    value={values.title}
                                 />
                             </div>
 
@@ -90,7 +99,7 @@ const AddTaskPage = () => {
                                 <input
                                     type="datetime-local"
                                     name="deadline"
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => dateOnChange(new Date(e.target.value))}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dateOnChange(new Date(e.target.value))}
                                 />
                             </div>
 
@@ -118,8 +127,6 @@ const AddTaskPage = () => {
                                 onChange={checkboxOnChange}
                                 />
                             </div>
-
-
 
                             <button type="submit">test</button>
                         </form>

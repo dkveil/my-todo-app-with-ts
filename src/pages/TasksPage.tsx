@@ -2,10 +2,9 @@ import { useTasksContext } from "../context/TasksContext";
 
 const TasksPage = () => {
 
-    const { tasks, AddTask } = useTasksContext();
+    const { tasks} = useTasksContext();
 
     const handleClick = () => {
-        AddTask('task')
     }
     console.log(tasks)
 
@@ -16,7 +15,7 @@ const TasksPage = () => {
             <h2>completed</h2>
             <hr/>
             {tasks.map(item => (
-                <>{item.name}</>
+                <div>{item.title}</div>
             ))}
         </>
     );
