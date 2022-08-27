@@ -52,6 +52,11 @@ export const Field = styled.div<FieldType>`
 
     select {
         padding: 13px 14px;
+        border-radius: 12px;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 
     ${(props) => {
@@ -67,6 +72,18 @@ export const Field = styled.div<FieldType>`
             case 'select':
                 return`
                     height: 55px;
+                        :after{
+                        content: '<>';
+                        letter-spacing: 2px;
+                        position: absolute;
+                        font-weight: bold;
+                        font-size: 14px;
+                        top: 55%;
+                        color: ${theme.color.font};
+                        transform: rotate(90deg) translateX(-50%);
+                        right: 8px;
+                        pointer-events: none;
+                    }
                 `
             case 'date':
                 return`
@@ -93,6 +110,7 @@ export const Label = styled.div<LabelType>`
 
     position: absolute;
     color: ${theme.color.formfieldborder};
+    z-index: 1;
 
     ${(props) => {
         if(props.error){
@@ -147,12 +165,12 @@ export const Input = styled.input<InputType>`
                         top: -150%;
                         position: absolute;
                         color: #bd9800;
-                        content: "\\2605";
+                        content: "\\2606";
                         visibility: visible;
                     }
 
                     :checked:before{
-                        content: "\\2606";
+                        content: "\\2605";
                     }
 
                 `
@@ -180,6 +198,7 @@ export const TextArea = styled.textarea`
 `
 
 export const Select = styled.select`
+    position: relative;
     color: ${({theme}) => theme.color.font};
     font-family: ${({theme}) => theme.font.family.primary};
     font-size: 16px;
@@ -192,6 +211,7 @@ export const Select = styled.select`
         color: transparent;
         text-shadow: 0 0 0 white;
     }
+
 `
 
 export const Option = styled.option`

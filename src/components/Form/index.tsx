@@ -4,6 +4,7 @@ import { useTasksContext } from "../../context/TasksContext";
 import { v4 as uuidv4 } from "uuid";
 import * as Form from "./Form.styles";
 import FormField from './FormField'
+import { ChangeEvent } from 'react'
 
 type FormModel = {
     title: string;
@@ -17,6 +18,41 @@ type FormModel = {
 const TaskForm = () => {
     const { AddTask } = useTasksContext();
 
+    const categoryOptions = [
+        {
+            name: 'default'
+        },
+        {
+            name: 'wish list'
+        },
+        {
+            name: 'personal'
+        },
+        {
+            name: 'work'
+        },
+        {
+            name: 'shopping'
+        },{
+            name: 'other'
+        }
+    ]
+
+    const priorityOptions = [
+        {
+            name: "no priority"
+        },
+        {
+            name: "low priority"
+        },
+        {
+            name: "medium priority"
+        },
+        {
+            name: "high priority"
+        }
+    ]
+
     return (
         <Formik<FormModel>
             initialValues={{
@@ -27,7 +63,11 @@ const TaskForm = () => {
                 priority: "no priority",
                 favorite: false,
             }}
+
             onSubmit={(values) => {
+
+                alert(values.favorite)
+
                 AddTask({
                     id: uuidv4(),
                     title: values.title,
@@ -40,6 +80,7 @@ const TaskForm = () => {
                     completed: false,
                 });
             }}
+
             validate={(values) => {
                 let errors = {
                     title: ""
@@ -53,13 +94,14 @@ const TaskForm = () => {
             }}
         >
             {({ handleSubmit, values, handleChange, setFieldValue, errors }) => {
+
                 const dateOnChange = (
-                    e: React.ChangeEvent<HTMLInputElement>
+                    date: string
                 ) => {
-                    if (e.target.value) {
+                    if (date) {
                         setFieldValue(
                             "deadline",
-                            new Date(e.target.value).toISOString()
+                            new Date(date).toISOString()
                         );
                     } else {
                         setFieldValue("deadline", undefined);
@@ -67,7 +109,7 @@ const TaskForm = () => {
                 };
 
                 const checkboxOnChange = (
-                    e: React.ChangeEvent<HTMLInputElement>
+                    e: ChangeEvent<HTMLInputElement>
                 ) => {
                     setFieldValue("favorite", e.target.checked);
                 };
@@ -77,78 +119,65 @@ const TaskForm = () => {
                         <FormField
                             fieldtype="text"
                             inputtype="text"
-                            isLabel={true}
                             inputname="title"
                             inputvalue={values.title}
+                            isLabel={true}
                             labelText="Task title - *required"
                             onChangeHandler={handleChange}
                             error={errors.title}
                         />
-                        <Form.Field fieldtype="textarea">
-                            <Form.TextArea
-                                name="note"
-                                onChange={handleChange}
-                                value={values.note}
-                                />
-                            <Form.Label labeltype="textarea">Note</Form.Label>
-                        </Form.Field>
+                        <FormField
+                            fieldtype="textarea"
+                            inputname="note"
+                            inputtype="textarea"
+                            inputvalue={values.note}
+                            isLabel={true}
+                            labelText="note"
+                            labeltype="textarea"
+                            onChangeHandler={handleChange}
+                        />
+                        <FormField
+                            fieldtype="select"
+                            inputname="category"
+                            inputtype="select"
+                            inputvalue={values.category}
+                            isLabel={true}
+                            labelText="Category"
+                            onChangeHandler={handleChange}
+                            options={categoryOptions}
+                        />
+                        <FormField
+                            fieldtype="date"
+                            inputname="deadline"
+                            inputtype="datetime-local"
+                            isLabel={true}
+                            labelText="Deadline"
+                            onChangeHandler={(e) =>
+                                dateOnChange(e.target.value)
+                            }
+                        />
+                        <FormField
+                            fieldtype="select"
+                            inputname="priority"
+                            inputtype="select"
+                            inputvalue={values.priority}
+                            isLabel={true}
+                            labelText="Priority"
+                            onChangeHandler={handleChange}
+                            options={priorityOptions}
+                        />
 
-                        <Form.Field fieldtype="select">
-                            <Form.Label>Category</Form.Label>
-                            <Form.Select
-                                name="category"
-                                onChange={handleChange}
-                                value={values.category}
-                            >
-                                <Form.Option value="default">
-                                    default
-                                </Form.Option>
-                                <Form.Option value="wish list">
-                                    wish list
-                                </Form.Option>
-                                <Form.Option value="personal">
-                                    personal
-                                </Form.Option>
-                                <Form.Option value="work">work</Form.Option>
-                                <Form.Option value="shopping">
-                                    shopping
-                                </Form.Option>
-                                <Form.Option value="other">other</Form.Option>
-                            </Form.Select>
-                        </Form.Field>
-
-                        <Form.Field fieldtype="date">
-                            <Form.Label>Deadline</Form.Label>
-                            <Form.Input
-                                type="datetime-local"
-                                name="deadline"
-                                onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                ) => dateOnChange(e)}
-                            />
-                        </Form.Field>
-
-                        <Form.Field fieldtype="select">
-                            <Form.Label>Priority</Form.Label>
-                            <Form.Select
-                                name="priority"
-                                onChange={handleChange}
-                                value={values.priority}
-                            >
-                                <Form.Option value="no priority">
-                                    no priority
-                                </Form.Option>
-                                <Form.Option value="low priority">
-                                    low priority
-                                </Form.Option>
-                                <Form.Option value="medium priority">
-                                    medium priority
-                                </Form.Option>
-                                <Form.Option value="high priority">
-                                    high priority
-                                </Form.Option>
-                            </Form.Select>
-                        </Form.Field>
+                        {/* <FormField
+                            fieldtype="checkbox"
+                            inputstyletype="checkbox-star"
+                            inputtype="checkbox"
+                            inputname="favorite"
+                            inputchecked={values.favorite}
+                            isLabel={true}
+                            labelText="favorite?"
+                            labeltype="checkbox"
+                            onChangeHandler={checkboxOnChange}
+                        /> */}
 
                         <Form.Field fieldtype="checkbox">
                             <Form.Input
@@ -158,7 +187,9 @@ const TaskForm = () => {
                                 type="checkbox"
                                 onChange={checkboxOnChange}
                             />
-                            <Form.Label labeltype="checkbox">favorite?</Form.Label>
+                            <Form.Label labeltype="checkbox">
+                                favorite?
+                            </Form.Label>
                         </Form.Field>
 
                         <Form.Button type="submit">Add task</Form.Button>
