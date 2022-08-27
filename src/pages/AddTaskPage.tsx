@@ -43,9 +43,9 @@ const AddTaskPage = () => {
             >
                 {({ handleSubmit, values, handleChange, setFieldValue }) => {
 
-                    const dateOnChange = (date?: Date) => {
-                        if(date){
-                            setFieldValue("deadline", date.toISOString())
+                    const dateOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                        if(e.target.value){
+                            setFieldValue("deadline", new Date(e.target.value).toISOString())
                         } else {
                             setFieldValue("deadline", undefined)
                         }
@@ -99,7 +99,7 @@ const AddTaskPage = () => {
                                 <input
                                     type="datetime-local"
                                     name="deadline"
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dateOnChange(new Date(e.target.value))}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dateOnChange(e)}
                                 />
                             </div>
 
