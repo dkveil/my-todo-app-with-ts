@@ -9,11 +9,14 @@ export const theme = {
         bgcart: '#fbf8f3',
         bgcartshadow: '#d1d1d1',
         font: '#232323',
+
         fonthover: '#626262',
         formfieldborder: '#565656',
         formfieldbg: 'white',
         formbtnbg: 'gray',
-        formbtnfont: 'white'
+        formbtnbghover: 'darkgray',
+        formbtnbgactive: '#383838',
+        formbtnfont: 'white',
     },
     mq: {
         tablet: `@media screen and (min-width: 768px)`,

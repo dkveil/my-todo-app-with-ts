@@ -148,4 +148,12 @@ export const Button = styled.button`
     color: ${theme.color.formbtnfont};
     border-radius: 10px;
     border: none;
+
+    :hover{
+        background-color: ${theme.color.formbtnbghover};
+    }
+
+    :active{
+        background-color: ${theme.color.formbtnbgactive};
+    }
 `
