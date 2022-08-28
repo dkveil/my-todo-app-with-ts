@@ -2,9 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import { useTasksContext } from "../../context/TasksContext";
 import { v4 as uuidv4 } from "uuid";
-import * as Form from "./Form.styles";
+import {Wrapper, Button} from "./Form.styles";
 import FormField from './FormField'
-import { ChangeEvent } from 'react'
 
 type FormModel = {
     title: string;
@@ -109,13 +108,13 @@ const TaskForm = () => {
                 };
 
                 const checkboxOnChange = (
-                    e: ChangeEvent<HTMLInputElement>
+                    e: React.ChangeEvent<HTMLInputElement>
                 ) => {
                     setFieldValue("favorite", e.target.checked);
                 };
 
                 return (
-                    <Form.Wrapper onSubmit={handleSubmit}>
+                    <Wrapper onSubmit={handleSubmit}>
                         <FormField
                             fieldtype="text"
                             inputtype="text"
@@ -123,7 +122,7 @@ const TaskForm = () => {
                             inputvalue={values.title}
                             isLabel={true}
                             labelText="Task title - *required"
-                            onChangeHandler={handleChange}
+                            onChangeInputHandler={handleChange}
                             error={errors.title}
                         />
                         <FormField
@@ -134,7 +133,7 @@ const TaskForm = () => {
                             isLabel={true}
                             labelText="note"
                             labeltype="textarea"
-                            onChangeHandler={handleChange}
+                            onChangeTextAreaHandler={handleChange}
                         />
                         <FormField
                             fieldtype="select"
@@ -143,7 +142,7 @@ const TaskForm = () => {
                             inputvalue={values.category}
                             isLabel={true}
                             labelText="Category"
-                            onChangeHandler={handleChange}
+                            onChangeSelectHandler={handleChange}
                             options={categoryOptions}
                         />
                         <FormField
@@ -152,8 +151,8 @@ const TaskForm = () => {
                             inputtype="datetime-local"
                             isLabel={true}
                             labelText="Deadline"
-                            onChangeHandler={(e) =>
-                                dateOnChange(e.target.value)
+                            onChangeInputHandler={(e) =>
+                                dateOnChange(e.currentTarget.value)
                             }
                         />
                         <FormField
@@ -163,11 +162,11 @@ const TaskForm = () => {
                             inputvalue={values.priority}
                             isLabel={true}
                             labelText="Priority"
-                            onChangeHandler={handleChange}
+                            onChangeSelectHandler={handleChange}
                             options={priorityOptions}
                         />
 
-                        {/* <FormField
+                        <FormField
                             fieldtype="checkbox"
                             inputstyletype="checkbox-star"
                             inputtype="checkbox"
@@ -176,24 +175,10 @@ const TaskForm = () => {
                             isLabel={true}
                             labelText="favorite?"
                             labeltype="checkbox"
-                            onChangeHandler={checkboxOnChange}
-                        /> */}
-
-                        <Form.Field fieldtype="checkbox">
-                            <Form.Input
-                                inputtype="checkbox-star"
-                                name="favorite"
-                                checked={values.favorite}
-                                type="checkbox"
-                                onChange={checkboxOnChange}
-                            />
-                            <Form.Label labeltype="checkbox">
-                                favorite?
-                            </Form.Label>
-                        </Form.Field>
-
-                        <Form.Button type="submit">Add task</Form.Button>
-                    </Form.Wrapper>
+                            onChangeInputHandler={(e: React.ChangeEvent<HTMLInputElement>) => checkboxOnChange(e)}
+                        />
+                        <Button type="submit">Add task</Button>
+                    </Wrapper>
                 );
             }}
         </Formik>

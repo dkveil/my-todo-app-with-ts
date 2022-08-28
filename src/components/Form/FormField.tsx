@@ -14,20 +14,17 @@ type FormFieldTypes = {
     inputstyletype?: "checkbox-star";
     inputtype: string;
     inputname: string;
-    inputvalue?: string | number | readonly string[] ;
+    inputvalue?: string | number | readonly string[];
     inputchecked?: boolean;
-    onChangeHandler: (
-        e:
-        React.ChangeEvent<HTMLInputElement>
-        | React.ChangeEvent<HTMLTextAreaElement>
-        | React.ChangeEvent<HTMLSelectElement>
-    ) => void;
+    onChangeInputHandler?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeTextAreaHandler?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChangeSelectHandler?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     error?: string;
-    options?: optionType[]
+    options?: optionType[];
 };
 
 
-const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, inputchecked, onChangeHandler, error, labeltype, options}: FormFieldTypes) => {
+const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, inputchecked, onChangeInputHandler, onChangeSelectHandler, onChangeTextAreaHandler, error, labeltype, options}: FormFieldTypes) => {
 
     const [isFocused, setIsFocused] = React.useState<boolean>(false)
 
@@ -39,7 +36,7 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                         inputtype={inputstyletype}
                         type={inputtype}
                         name={inputname}
-                        onChange={onChangeHandler}
+                        onChange={onChangeInputHandler}
                         value={inputvalue}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
@@ -50,7 +47,7 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                     <TextArea
                         name={inputname}
                         value={inputvalue}
-                        onChange={onChangeHandler}
+                        onChange={onChangeTextAreaHandler}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                     />
@@ -60,7 +57,7 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                     <Select
                         name={inputname}
                         value={inputvalue}
-                        onChange={onChangeHandler}
+                        onChange={onChangeSelectHandler}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                     >
@@ -78,22 +75,22 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                         name={inputname}
                         type={inputtype}
                         value={inputvalue}
-                        onChange={onChangeHandler}
+                        onChange={onChangeInputHandler}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                     />
                 );
-            // case 'checkbox':
-            //     return (
-            //         <Input
-            //             inputtype={inputstyletype}
-            //             name={inputname}
-            //             type={inputtype}
-            //             checked={inputchecked}
-            //             onChange={onChangeHandler}
+            case 'checkbox':
+                return (
+                    <Input
+                        inputtype={inputstyletype}
+                        name={inputname}
+                        type={inputtype}
+                        checked={inputchecked}
+                        onChange={onChangeInputHandler}
 
-            //         />
-            //     )
+                    />
+                )
 
             default:
                 return null;
