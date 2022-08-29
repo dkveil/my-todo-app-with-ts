@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router";
 import NavbarCart from "./components/NavbarCart";
 import Navbar from "./components/Navbar/index";
 import { Wrapper, AppWrapper } from "./containers/container";
+import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import TasksPage from "./pages/TasksPage";
@@ -22,6 +23,7 @@ const App = () => {
                         <NavbarCart />
                         <AppWrapper>
                             <Navbar />
+                            <Header/>
                             <Routes>
                                 <Route path="/" element={<HomePage />} />
                                 <Route path="/about" element={<AboutPage />} />

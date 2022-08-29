@@ -19,8 +19,10 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: calc(100vw - 32px);
+    width: calc(100vw - 42px);
     margin: 0 auto;
+    height: inherit;
+    min-height: inherit;
 
     ${({theme}) => theme.mq.tablet}{
         width: calc(100vw - 64px);

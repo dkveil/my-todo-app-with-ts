@@ -18,6 +18,7 @@ type taskProps = {
 
 type TasksContextTypes = {
     tasks: taskProps[];
+    numberOfTask: number;
     AddTask: (task: taskProps) => void;
 };
 
@@ -54,6 +55,7 @@ export const useTasksContext = () => React.useContext(TasksContext);
 const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const [tasks, dispatch] = React.useReducer(taskReducer, [])
+    const numberOfTask = tasks.length;
 
     const AddTask = (task: taskProps) => {
         dispatch({
@@ -66,6 +68,7 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
         <TasksContext.Provider
             value={{
                 tasks,
+                numberOfTask,
                 AddTask
             }}
         >

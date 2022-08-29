@@ -18,7 +18,7 @@ export const Hamburger = styled.div<ButtonStylesProps>`
         width: 100%;
         height: 2px;
         background-color: ${({ theme }) => theme.color.font};
-        z-index: 2;
+        z-index: 10;
         border-radius: 4px;
         transition: transform 0.2s;
 

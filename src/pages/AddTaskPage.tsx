@@ -1,10 +1,13 @@
 import TaskForm from "../components/Form";
+import { Container } from "../containers/container";
 
 const AddTaskPage = () => {
 
     return (
         <div>
-            <TaskForm />
+            <Container>
+                <TaskForm />
+            </Container>
         </div>
     );
 };

@@ -14,9 +14,8 @@ type InputType = {
 export const Wrapper = styled.form`
     display: flex;
     flex-direction: column;
-    padding: 1rem 10rem;
-    width: 520px;
-
+    width: 100%;
+    padding: 1rem 0;
 `
 
 export const Field = styled.div<FieldType>`
@@ -26,7 +25,7 @@ export const Field = styled.div<FieldType>`
 
     background-color: ${({theme}) => theme.colorformfieldbg};
     margin-bottom: 2rem;
-    width: 520px;
+    width: 100%;
 
     ${(props) => {
         if(props.error){
@@ -220,7 +219,8 @@ export const Option = styled.option`
 `
 
 export const ErrorMsg = styled.div`
-    font-size: 14px;
+    font-size: 12px;
+    margin: 5px auto 0 4px;
     color: red;
 `
 
@@ -228,7 +228,7 @@ export const Button = styled.button`
     font-family: ${theme.font.family.primary};
     font-size: 16px;
     background-color: ${theme.color.formbtnbg};
-    width: 520px;
+    width: 100%;
     height: 45px;
     color: ${theme.color.formbtnfont};
     border-radius: 10px;
