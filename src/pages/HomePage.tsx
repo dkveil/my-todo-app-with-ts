@@ -1,8 +1,14 @@
+import { Container } from "../containers/container";
+
 const HomePage = () => {
     return (
-        <>
-            homepage
-        </>
+        <div>
+            <Container>
+                <div style={{ width: "100%", backgroundColor: "cyan" }}>
+                    homepage
+                </div>
+            </Container>
+        </div>
     );
 };
 

@@ -14,43 +14,44 @@ type FormModel = {
     favorite: boolean;
 };
 
+const categoryOptions = [
+    {
+        name: 'default'
+    },
+    {
+        name: 'wish list'
+    },
+    {
+        name: 'personal'
+    },
+    {
+        name: 'work'
+    },
+    {
+        name: 'shopping'
+    },{
+        name: 'other'
+    }
+]
+
+const priorityOptions = [
+    {
+        name: "no priority"
+    },
+    {
+        name: "low priority"
+    },
+    {
+        name: "medium priority"
+    },
+    {
+        name: "high priority"
+    }
+]
+
 const TaskForm = () => {
     const { AddTask } = useTasksContext();
 
-    const categoryOptions = [
-        {
-            name: 'default'
-        },
-        {
-            name: 'wish list'
-        },
-        {
-            name: 'personal'
-        },
-        {
-            name: 'work'
-        },
-        {
-            name: 'shopping'
-        },{
-            name: 'other'
-        }
-    ]
-
-    const priorityOptions = [
-        {
-            name: "no priority"
-        },
-        {
-            name: "low priority"
-        },
-        {
-            name: "medium priority"
-        },
-        {
-            name: "high priority"
-        }
-    ]
 
     return (
         <Formik<FormModel>

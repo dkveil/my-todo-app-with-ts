@@ -5,7 +5,6 @@ type optionType = {
     name: string;
 }
 
-
 type FormFieldTypes = {
     fieldtype: "text" | "textarea" | "date" | "select" | "checkbox";
     isLabel: boolean;
@@ -16,15 +15,16 @@ type FormFieldTypes = {
     inputname: string;
     inputvalue?: string | number | readonly string[];
     inputchecked?: boolean;
-    onChangeInputHandler?: (e:React.ChangeEvent<HTMLInputElement>) => void;
-    onChangeTextAreaHandler?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChangeInputHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeTextAreaHandler?: (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => void;
     onChangeSelectHandler?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     error?: string;
     options?: optionType[];
-};
+} ;
 
-
-const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, inputchecked, onChangeInputHandler, onChangeSelectHandler, onChangeTextAreaHandler, error, labeltype, options}: FormFieldTypes) => {
+const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, inputname, inputvalue, inputchecked, onChangeInputHandler, onChangeSelectHandler, onChangeTextAreaHandler, error, labeltype, options}: FormFieldTypes ) => {
 
     const [isFocused, setIsFocused] = React.useState<boolean>(false)
 
@@ -88,7 +88,6 @@ const FormField = ({fieldtype, isLabel, labelText, inputstyletype, inputtype, in
                         type={inputtype}
                         checked={inputchecked}
                         onChange={onChangeInputHandler}
-
                     />
                 )
 
