@@ -8,18 +8,21 @@ const Navbar = () => {
     const { barActive, openBar, closeBar } = useGlobalContext();
 
     return (
+        <>
+        <Button buttontype="hamburger" size='30px' active={barActive} onClickHandler={barActive ? closeBar : openBar}/>
         <Nav.Wrapper>
             <Container>
                 <Nav.Content>
                     <div>
-                        <Button buttontype="hamburger" size='30px' active={barActive} onClickHandler={
+                        {/* <Button buttontype="hamburger" size='30px' active={barActive} onClickHandler={
                             barActive ? closeBar : openBar
-                        }/>
+                        }/> */}
                     </div>
                     <div></div>
                 </Nav.Content>
             </Container>
         </Nav.Wrapper>
+        </>
     )
 }
 

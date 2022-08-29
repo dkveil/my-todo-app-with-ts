@@ -9,16 +9,27 @@ export type ButtonStylesProps = {
 export const Hamburger = styled.div<ButtonStylesProps>`
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 17px;
+    left: 21px;
     height: ${(props) => (props.size ? props.size : "40px")};
     width: ${(props) => (props.size ? props.size : "40px")};
     cursor: pointer;
+
+    ${({theme}) => theme.mq.tablet}{
+        left: 32px;
+    }
+
+    ${({theme}) => theme.mq.desktop}{
+        display: none;
+    }
 
     div {
         position: relative;
         width: 100%;
         height: 2px;
         background-color: ${({ theme }) => theme.color.font};
-        z-index: 10;
+        z-index: 4;
         border-radius: 4px;
         transition: transform 0.2s;
 

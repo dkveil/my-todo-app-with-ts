@@ -12,7 +12,7 @@ export const Wrapper = styled.div<WrapperTypes>`
     background-color: ${({theme}) => theme.color.bgcart};
     transform: ${(props) => props.opened ? 'translateX(0)': 'translateX(-100%)'};
     box-shadow: 0 0 .3rem ${({theme}) => theme.color.bgcartshadow};
-    z-index: 9;
+    z-index: 3;
     padding: 0 30px;
     transition: transform .2s;
 

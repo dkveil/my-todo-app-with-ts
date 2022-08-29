@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.header`
     height: 140px;
-    /* margin-top: ${({theme}) => theme.height.navbar}; */
+    margin-top: ${({theme}) => theme.height.navbar};
 
     ${({theme}) => theme.mq.desktop}{
         margin: 0;
