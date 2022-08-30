@@ -9,20 +9,39 @@ const TasksPage = () => {
 
     const { tasks } = useTasksContext();
 
-    const completedTasks = tasks.filter(item => item.completed)
-    const inProgressTasks = tasks.filter(item => {
+    let completedTasks = tasks
+        .filter((item) => item.completed)
+        .sort((a, b) => {
+            return (
+                new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        });
+
+    let inProgressTasks = tasks.filter(item => {
         if(!item.completed && !item.deadline){
             return item
         }
         if(!item.completed && item.deadline){
             return new Date(item.deadline).getTime() > Now.getTime();
         }
+    }).sort((a , b) => {
+        return (
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
     })
-    const afterDeadlineTasks =  tasks.filter(item => {
-        if(!item.completed && item.deadline){
-            return new Date(item.deadline).getTime() < Now.getTime()
-        }
-    })
+
+
+    let afterDeadlineTasks = tasks
+        .filter((item) => {
+            if (!item.completed && item.deadline) {
+                return new Date(item.deadline).getTime() < Now.getTime();
+            }
+        })
+        .sort((a, b) => {
+            return (
+                new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        });
 
     return (
         <TaskPageWrapper>

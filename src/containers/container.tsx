@@ -13,6 +13,9 @@ export const AppWrapper = styled.div`
     flex-grow: 1;
     background-color: ${({ theme }) => theme.color.bgapp};
     max-width: calc(100% - 400px);
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
 `;
 
 export const Container = styled.div`
