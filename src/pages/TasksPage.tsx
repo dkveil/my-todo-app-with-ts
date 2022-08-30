@@ -5,8 +5,8 @@ const TasksPage = () => {
     const { tasks} = useTasksContext();
 
     const handleClick = () => {
+        console.log(tasks)
     }
-    console.log(tasks)
 
     return (
         <>

@@ -2,8 +2,11 @@ import React from "react";
 import { Formik } from "formik";
 import { useTasksContext } from "../../context/TasksContext";
 import { v4 as uuidv4 } from "uuid";
-import {Wrapper, Button} from "./Form.styles";
+import {Wrapper, Button as Btn} from "./Form.styles";
 import FormField from './FormField'
+import * as Yup from 'yup'
+import { useNavigate } from 'react-router-dom';
+import Button from "./../Button/index";
 
 type FormModel = {
     title: string;
@@ -52,6 +55,12 @@ const priorityOptions = [
 const TaskForm = () => {
     const { AddTask } = useTasksContext();
 
+    const validationSchema = Yup.object({
+        title: Yup.string().required("Hey! I can't add your task if you leave this field empty")
+    })
+
+    let navigate = useNavigate()
+
 
     return (
         <Formik<FormModel>
@@ -64,10 +73,9 @@ const TaskForm = () => {
                 favorite: false,
             }}
 
+            validationSchema={validationSchema}
+
             onSubmit={(values) => {
-
-                alert(values.favorite)
-
                 AddTask({
                     id: uuidv4(),
                     title: values.title,
@@ -79,19 +87,10 @@ const TaskForm = () => {
                     favorite: values.favorite,
                     completed: false,
                 });
+
+                navigate("./success")
             }}
 
-            validate={(values) => {
-                let errors = {
-                    title: ""
-                }
-
-                if(!values.title){
-                    errors.title = "Hey! I can't add a task if you leave this field empty!"
-                }
-
-                return errors
-            }}
         >
             {({ handleSubmit, values, handleChange, setFieldValue, errors }) => {
 
@@ -178,7 +177,11 @@ const TaskForm = () => {
                             labeltype="checkbox"
                             onChangeInputHandler={(e: React.ChangeEvent<HTMLInputElement>) => checkboxOnChange(e)}
                         />
-                        <Button type="submit">Add task</Button>
+                        <Button
+                            buttontype="square"
+                            onClickHandler={handleSubmit}
+                            size="100%"
+                        >Add task</Button>
                     </Wrapper>
                 );
             }}

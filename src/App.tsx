@@ -28,10 +28,8 @@ const App = () => {
                                 <Route path="/" element={<HomePage />} />
                                 <Route path="/about" element={<AboutPage />} />
                                 <Route path="/tasks" element={<TasksPage />} />
-                                <Route
-                                    path="/add-task"
-                                    element={<AddTaskPage />}
-                                />
+                                <Route path="/add-task" element={<AddTaskPage />}/>
+                                <Route path="/add-task/:status" element={<AddTaskPage />}/>
                             </Routes>
                         </AppWrapper>
                     </Wrapper>

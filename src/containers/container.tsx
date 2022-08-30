@@ -28,6 +28,6 @@ export const Container = styled.div`
         width: calc(100vw - 64px);
     }
     ${({theme}) => theme.mq.desktop}{
-        width: calc(100% - 64px);
+        width: calc(100% - 128px);
     }
 `

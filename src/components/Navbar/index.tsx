@@ -13,12 +13,8 @@ const Navbar = () => {
         <Nav.Wrapper>
             <Container>
                 <Nav.Content>
-                    <div>
-                        {/* <Button buttontype="hamburger" size='30px' active={barActive} onClickHandler={
-                            barActive ? closeBar : openBar
-                        }/> */}
-                    </div>
-                    <div></div>
+                    <div/>
+                    <div/>
                 </Nav.Content>
             </Container>
         </Nav.Wrapper>

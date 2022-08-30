@@ -2,7 +2,7 @@ import { Container } from "../containers/container";
 
 const HomePage = () => {
     return (
-        <div>
+        <div style={{height: '200vh'}}>
             <Container>
                 <div style={{ width: "100%", backgroundColor: "cyan" }}>
                     homepage

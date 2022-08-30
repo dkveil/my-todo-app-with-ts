@@ -1,12 +1,14 @@
+import React from 'react';
 import * as Btn from './Button.styles'
 import { ButtonStylesProps } from './Button.styles'
 
 interface ButtonProps extends ButtonStylesProps {
     buttontype: string;
     onClickHandler: () => void;
+    children?: React.ReactNode
 }
 
-const Button = ({ buttontype, size, active, onClickHandler }: ButtonProps) => {
+const Button = ({ buttontype, size, active, onClickHandler, children }: ButtonProps) => {
     switch (buttontype) {
         case "hamburger":
             return (
@@ -18,6 +20,15 @@ const Button = ({ buttontype, size, active, onClickHandler }: ButtonProps) => {
                     <div />
                 </Btn.Hamburger>
             );
+        case "square":
+            return (
+                <Btn.Square
+                    size={size}
+                    onClick={onClickHandler}
+                    >
+                    {children}
+                </Btn.Square>
+            )
         default:
             return null;
     }

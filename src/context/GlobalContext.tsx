@@ -22,6 +22,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderTypes) => {
     const closeBar = () => setBarActive(false)
     const openBar = () => setBarActive(true)
 
+
     return (
         <GlobalContext.Provider
             value={{

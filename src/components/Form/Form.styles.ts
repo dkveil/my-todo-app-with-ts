@@ -62,7 +62,7 @@ export const Field = styled.div<FieldType>`
         switch(props.fieldtype){
             case 'text':
                 return`
-                    height: 55px;
+                    height: 50px;
                 `
             case 'textarea':
                 return`
@@ -70,7 +70,7 @@ export const Field = styled.div<FieldType>`
                 `
             case 'select':
                 return`
-                    height: 55px;
+                    height: 50px;
                         :after{
                         content: '<>';
                         letter-spacing: 2px;
@@ -86,7 +86,7 @@ export const Field = styled.div<FieldType>`
                 `
             case 'date':
                 return`
-                    height: 55px
+                    height: 50px
                 `
             case 'checkbox':
                 return`

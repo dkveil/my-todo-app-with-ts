@@ -1,14 +1,18 @@
 import TaskForm from "../components/Form";
 import { Container } from "../containers/container";
+import { useParams } from "react-router";
+import SuccesBoard from "../components/SuccesBoard";
 
 const AddTaskPage = () => {
 
+    const params = useParams()
+
     return (
-        <div>
+        <section>
             <Container>
-                <TaskForm />
+                {params.status ? <SuccesBoard /> : <TaskForm />}
             </Container>
-        </div>
+        </section>
     );
 };
 

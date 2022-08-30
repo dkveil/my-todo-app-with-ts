@@ -4,12 +4,34 @@ import { theme } from "../../styles/theme";
 export type ButtonStylesProps = {
     size?: string;
     active?: boolean;
+    padding?: string;
 }
+
+export const Square = styled.button<ButtonStylesProps>`
+    font-family: ${theme.font.family.primary};
+    color: ${theme.color.bgapp};
+    font-size: 16px;
+    background-color: ${theme.color.formbtnbg};
+    width: ${(props) => props.size? props.size: "fit-content"};
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    padding: ${(props) => props.padding ? props.padding : "10px"};
+
+    :hover{
+        background-color: ${theme.color.formbtnbghover};
+    }
+
+    :active{
+        background-color: ${theme.color.formactive};
+    }
+`
 
 export const Hamburger = styled.div<ButtonStylesProps>`
     display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
+    z-index: 4;
     top: 17px;
     left: 21px;
     height: ${(props) => (props.size ? props.size : "40px")};
