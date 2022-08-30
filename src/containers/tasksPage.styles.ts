@@ -16,9 +16,8 @@ export const TaskPageContent = styled.div`
 
 export const TasksWrapper = styled.div`
     width: 100%;
-    border: 1px solid ${({theme}) => theme.color.font};
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 5px;
     flex-grow: 1;
 
     h2{
