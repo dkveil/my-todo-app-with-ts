@@ -86,3 +86,15 @@ export const Hamburger = styled.div<ButtonStylesProps>`
         }
     }
 `;
+
+export const Transparent = styled.button`
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    color: ${({theme}) => theme.color.font};
+
+`

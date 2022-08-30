@@ -9,10 +9,10 @@ type taskProps = {
     id: string;
     title: string;
     category: string;
+    priority: string;
     note: string;
     createdAt: string;
     deadline?: string;
-    priority: string;
     favorite: boolean;
     completed: boolean;
 }

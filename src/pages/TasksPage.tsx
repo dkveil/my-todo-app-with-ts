@@ -2,7 +2,6 @@ import { useTasksContext } from "../context/TasksContext";
 import TaskCart from '../components/TaskCart'
 import { Container } from "../containers/container";
 import { TaskPageWrapper, TaskPageContent, TasksWrapper } from "../containers/tasksPage.styles";
-import { formatToDate } from "../utils/isoFormatToDate.util";
 
 const TasksPage = () => {
 
@@ -37,6 +36,7 @@ const TasksPage = () => {
                                 title={item.title}
                                 category={item.category}
                                 note={item.note}
+                                priority={item.priority}
                                 createAt={item.createdAt}
                                 deadline={item.deadline}
                                 favorite={item.favorite}
@@ -53,6 +53,7 @@ const TasksPage = () => {
                                 title={item.title}
                                 category={item.category}
                                 note={item.note}
+                                priority={item.priority}
                                 createAt={item.createdAt}
                                 deadline={item.deadline}
                                 favorite={item.favorite}
@@ -68,6 +69,7 @@ const TasksPage = () => {
                                 title={item.title}
                                 category={item.category}
                                 note={item.note}
+                                priority={item.priority}
                                 createAt={item.createdAt}
                                 deadline={item.deadline}
                                 favorite={item.favorite}

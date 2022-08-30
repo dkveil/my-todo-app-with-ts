@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     width: 100vw;
     min-height: 100vh;
 `
@@ -13,6 +12,7 @@ export const AppWrapper = styled.div`
     flex-direction: column;
     flex-grow: 1;
     background-color: ${({ theme }) => theme.color.bgapp};
+    max-width: calc(100% - 400px);
 `;
 
 export const Container = styled.div`

@@ -29,6 +29,14 @@ const Button = ({ buttontype, size, active, onClickHandler, children }: ButtonPr
                     {children}
                 </Btn.Square>
             )
+        case "transparent":
+            return (
+                <Btn.Transparent
+                    onClick={onClickHandler}
+                >
+                    {children}
+                </Btn.Transparent>
+            )
         default:
             return null;
     }
