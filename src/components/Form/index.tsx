@@ -13,7 +13,11 @@ type FormModel = {
     category: string;
     note: string;
     deadline?: string;
-    priority: string;
+    priority:
+        | "no priority"
+        | "low priority"
+        | "medium priority"
+        | "high priority";
     favorite: boolean;
 };
 
@@ -81,9 +85,9 @@ const TaskForm = () => {
                     title: values.title,
                     category: values.category,
                     note: values.note,
+                    priority: values.priority,
                     createdAt: new Date().toISOString(),
                     deadline: values.deadline,
-                    priority: values.priority,
                     favorite: values.favorite,
                     completed: false,
                 });

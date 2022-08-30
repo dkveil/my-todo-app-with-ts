@@ -5,17 +5,21 @@ type TasksContextProviderProps = {
     children: React.ReactNode
 };
 
-type taskProps = {
+export type taskProps = {
     id: string;
     title: string;
     category: string;
-    priority: string;
+    priority:
+        | "no priority"
+        | "low priority"
+        | "medium priority"
+        | "high priority";
     note: string;
     createdAt: string;
     deadline?: string;
     favorite: boolean;
     completed: boolean;
-}
+};
 
 type TasksContextTypes = {
     tasks: taskProps[];
