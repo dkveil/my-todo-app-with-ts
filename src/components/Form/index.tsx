@@ -53,7 +53,7 @@ const priorityOptions = [
 ]
 
 const TaskForm = () => {
-    const { AddTask } = useTasksContext();
+    const { AddTask, setSuccessStatus } = useTasksContext();
 
     const validationSchema = Yup.object({
         title: Yup.string().required("Hey! I can't add your task if you leave this field empty")
@@ -87,8 +87,8 @@ const TaskForm = () => {
                     favorite: values.favorite,
                     completed: false,
                 });
-
                 navigate("./success")
+                setSuccessStatus()
             }}
 
         >

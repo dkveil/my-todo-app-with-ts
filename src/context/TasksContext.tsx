@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 
 type TasksContextProviderProps = {
     children: React.ReactNode
@@ -20,6 +21,8 @@ type TasksContextTypes = {
     tasks: taskProps[];
     numberOfTask: number;
     AddTask: (task: taskProps) => void;
+    addingStatusSuccess: boolean;
+    setSuccessStatus: () => void;
 };
 
 const TasksContext = React.createContext({} as TasksContextTypes)
@@ -55,7 +58,21 @@ export const useTasksContext = () => React.useContext(TasksContext);
 const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const [tasks, dispatch] = React.useReducer(taskReducer, [])
+    const [addingStatusSuccess, setAddingStatusSucces] = React.useState<boolean>(false)
+
     const numberOfTask = tasks.length;
+
+    const location = useLocation()
+
+    const setSuccessStatus = () => setAddingStatusSucces(true);
+
+    React.useEffect(() => {
+        if(location.pathname !== "/add-task/success"){
+            setAddingStatusSucces(false)
+        }
+    }, [location.pathname])
+
+
 
     const AddTask = (task: taskProps) => {
         dispatch({
@@ -69,7 +86,9 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
             value={{
                 tasks,
                 numberOfTask,
-                AddTask
+                AddTask,
+                addingStatusSuccess,
+                setSuccessStatus,
             }}
         >
             {children}
