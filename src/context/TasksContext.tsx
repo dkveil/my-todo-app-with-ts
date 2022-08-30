@@ -23,6 +23,7 @@ type TasksContextTypes = {
     AddTask: (task: taskProps) => void;
     addingStatusSuccess: boolean;
     setSuccessStatus: () => void;
+    changeStatusTask: (id: string) => void;
 };
 
 const TasksContext = React.createContext({} as TasksContextTypes)
@@ -31,7 +32,7 @@ type taskState = taskProps[]
 
 type taskAction = {
     type: string;
-    task: taskProps
+    task: taskProps;
 }
 
 const taskReducer = (state: taskState, action: taskAction) => {
@@ -48,6 +49,15 @@ const taskReducer = (state: taskState, action: taskAction) => {
                     return task
                 }
             });
+        case 'CHANGE_STATUS':
+            return state.map(task => {
+                if(action.task.id === task.id){
+                    return {...task, completed: !task.completed}
+                } else {
+                    return task
+                }
+
+            })
         default:
             return state;
     }
@@ -72,13 +82,22 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
         }
     }, [location.pathname])
 
-
-
     const AddTask = (task: taskProps) => {
         dispatch({
             type: "ADD",
             task
         });
+    }
+
+    const changeStatusTask = (id: string) => {
+        const task = tasks.find(item => item.id === id)
+
+        if(task){
+            dispatch({
+                type: "CHANGE_STATUS",
+                task
+            });
+        }
     }
 
     return (
@@ -89,6 +108,7 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
                 AddTask,
                 addingStatusSuccess,
                 setSuccessStatus,
+                changeStatusTask
             }}
         >
             {children}

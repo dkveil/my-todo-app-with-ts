@@ -10,13 +10,13 @@ const Header = () => {
     // const params = useParams()
 
     if(location.pathname === '/' || !location.pathname){
-        return <>homePage</>
+        return <H.Wrapper>homePage</H.Wrapper>
     }
     if(location.pathname === '/about'){
-        return <>aboutPage</>
+        return <H.Wrapper>aboutPage</H.Wrapper>
     }
     if(location.pathname === '/tasks'){
-        return <>tasksPage</>
+        return <H.Wrapper>tasksPage</H.Wrapper>
     }
 
     if(location.pathname === '/add-task'){
