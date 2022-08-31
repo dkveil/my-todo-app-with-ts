@@ -8,12 +8,15 @@ import {
     TasksWrapper,
 } from "../containers/tasksPage.styles";
 import { sortTasks } from "../utils/sortingTasks.util";
+import Button from "../components/Button";
+import { useNavigate } from "react-router";
 
 const sortOptions = ["name", "date of create", "deadline time", "priority level", "favorite"]
 
 const TasksPage = () => {
 
     const Now = new Date();
+    const navigate = useNavigate();
     const { tasks } = useTasksContext();
     const [sortOption, setSortOption] = React.useState({
         afterTheDeadline: "date of create",
@@ -67,7 +70,25 @@ const TasksPage = () => {
         <TaskPageWrapper>
             <Container>
                 <TaskPageContent>
-                    {wrappersCounter === 0 && "add your first task"}
+                    {wrappersCounter === 0 && (
+                        <div style={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            marginTop: "8rem",
+                            fontSize: "1.4rem",
+                            gap: "1rem"
+                        }}>
+                            Add your first task
+                            <Button
+                                buttontype="square"
+                                onClickHandler={() => navigate("../add-task")}
+                            >
+                                Add your first task
+                            </Button>
+                        </div>
+                    )}
                     {wrappersCounter !== 0 && (
                         <>
                             {afterDeadlineTasks.length > 0 && (

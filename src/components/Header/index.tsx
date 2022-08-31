@@ -16,7 +16,19 @@ const Header = () => {
         return <H.Wrapper>aboutPage</H.Wrapper>
     }
     if(location.pathname === '/tasks'){
-        return <H.Wrapper>tasksPage</H.Wrapper>
+        return (
+            <H.Wrapper>
+                <Container>
+                    <H.Content>
+                        <H.Title>
+                            {numberOfTask
+                                ? "Your things to do:"
+                                : "Here will be your thinks to do :)"}
+                        </H.Title>
+                    </H.Content>
+                </Container>
+            </H.Wrapper>
+        );
     }
 
     if(location.pathname === '/add-task'){
