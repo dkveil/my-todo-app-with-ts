@@ -64,7 +64,7 @@ type TaskFormProps = {
 }
 
 const TaskForm = ({taskValues}: TaskFormProps) => {
-    const { AddTask, EditTask, setSuccessStatus } = useTasksContext();
+    const { AddTask, EditTask, setAddingSuccessStatus, setEditingSuccessStatus } = useTasksContext();
 
     const validationSchema = Yup.object({
         title: Yup.string().required("Hey! I can't add your task if you leave this field empty")
@@ -105,11 +105,11 @@ const TaskForm = ({taskValues}: TaskFormProps) => {
                             : new Date().toISOString(),
                         deadline: values.deadline,
                         favorite: values.favorite,
-                        completed: false,
+                        completed: initValues.completed ? initValues.completed : false,
                     });
                     navigate("./success");
-                    setSuccessStatus();
-                }else {
+                    setEditingSuccessStatus();
+                } else {
                     AddTask({
                         id: uuidv4(),
                         title: values.title,
@@ -122,7 +122,7 @@ const TaskForm = ({taskValues}: TaskFormProps) => {
                         completed: false,
                     });
                     navigate("./success");
-                    setSuccessStatus();
+                    setAddingSuccessStatus();
                 }
             }}
         >
@@ -218,7 +218,7 @@ const TaskForm = ({taskValues}: TaskFormProps) => {
                             onClickHandler={handleSubmit}
                             size="100%"
                         >
-                            Add task
+                            {!taskValues ? "Add task" : "Edit task"}
                         </Button>
                     </Wrapper>
                 );

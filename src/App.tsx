@@ -31,7 +31,8 @@ const App = () => {
                                 <Route path="/tasks" element={<TasksPage />} />
                                 <Route path="/add-task" element={<AddTaskPage />}/>
                                 <Route path="/add-task/:status" element={<AddTaskPage />}/>
-                                <Route path="/edit-task/:id" element={<EditTaskPage />}/>
+                                <Route path="/edit-task/:id/" element={<EditTaskPage />}/>
+                                <Route path="/edit-task/:id/:status" element={<EditTaskPage />}/>
                             </Routes>
                         </AppWrapper>
                     </Wrapper>

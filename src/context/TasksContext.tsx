@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 type TasksContextProviderProps = {
     children: React.ReactNode
@@ -27,7 +27,9 @@ type TasksContextTypes = {
     AddTask: (task: taskProps) => void;
     EditTask: (task: taskProps) => void;
     addingStatusSuccess: boolean;
-    setSuccessStatus: () => void;
+    editingStatusSuccess: boolean;
+    setAddingSuccessStatus: () => void;
+    setEditingSuccessStatus: () => void;
     changeStatusTask: (id: string) => void;
 };
 
@@ -72,20 +74,28 @@ export const useTasksContext = () => React.useContext(TasksContext);
 
 const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
+    const params = useParams()
+    console.log(params.id)
+
     const [tasks, dispatch] = React.useReducer(taskReducer, [])
     const [addingStatusSuccess, setAddingStatusSucces] = React.useState<boolean>(false)
+    const [editingStatusSuccess, setEditingStatusSucces] = React.useState<boolean>(false)
 
     const numberOfTask = tasks.length;
 
     const location = useLocation()
 
-    const setSuccessStatus = () => setAddingStatusSucces(true);
+    const setAddingSuccessStatus = () => setAddingStatusSucces(true);
+    const setEditingSuccessStatus = () => setEditingStatusSucces(true);
 
     React.useEffect(() => {
         if(location.pathname !== "/add-task/success"){
             setAddingStatusSucces(false)
         }
-    }, [location.pathname])
+        if(params.id && params.status){
+            setEditingStatusSucces(false)
+        }
+    }, [location.pathname, params])
 
     const AddTask = (task: taskProps) => {
         dispatch({
@@ -120,7 +130,9 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
                 AddTask,
                 EditTask,
                 addingStatusSuccess,
-                setSuccessStatus,
+                editingStatusSuccess,
+                setAddingSuccessStatus,
+                setEditingSuccessStatus,
                 changeStatusTask
             }}
         >

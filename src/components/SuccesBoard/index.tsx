@@ -4,23 +4,24 @@ import { useTasksContext } from "../../context/TasksContext";
 import { useNavigate } from 'react-router-dom';
 
 const SuccesBoard = () => {
-    const { addingStatusSuccess } = useTasksContext();
+    const { addingStatusSuccess, editingStatusSuccess } = useTasksContext();
     const navigate = useNavigate()
 
     return (
         <Board.Wrapper>
             <h1>
-                {addingStatusSuccess
-                    ? "Your task has been added successfully! :)"
-                    : "Hey! Something went wrong! :("}
+                {addingStatusSuccess &&
+                "Your task has been added successfully! :)"}
+                {editingStatusSuccess && "Your task has been edited successfully! :)"}
+                {(!addingStatusSuccess && !editingStatusSuccess) && "Hey! Something went wrong! :("}
             </h1>
             <p>
-                {addingStatusSuccess
+                {addingStatusSuccess || editingStatusSuccess
                     ? "what do you wanna do now?"
                     : "Back to tasks page fast!"}
             </p>
             <Board.ButtonsContainer>
-                {addingStatusSuccess ? (
+                {addingStatusSuccess || editingStatusSuccess? (
                     <>
                         <Button
                             buttontype="square"
