@@ -1,3 +1,4 @@
+import React from "react";
 import { useTasksContext } from "../context/TasksContext";
 import TaskCart from "../components/TaskCart";
 import { Container } from "../containers/container";
@@ -8,10 +9,24 @@ import {
 } from "../containers/tasksPage.styles";
 import { sortTasks } from "../utils/sortingTasks.util";
 
-const TasksPage = () => {
-    const Now = new Date();
+const sortOptions = ["name", "date of create", "deadline time", "priority level", "favorite"]
 
+const TasksPage = () => {
+
+    const Now = new Date();
     const { tasks } = useTasksContext();
+    const [sortOption, setSortOption] = React.useState({
+        afterTheDeadline: "date of create",
+        inProgress: "date of create",
+        completed: "date of create",
+    })
+
+    const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortOption(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
 
     const completedTasks = tasks.filter((item) => item.completed);
 
@@ -34,28 +49,6 @@ const TasksPage = () => {
             else return null
         })
 
-
-    const test = [
-        {
-            name: "zzz"
-        },
-        {
-            name: "aaa"
-        }
-    ]
-
-    const sortedTest = test.sort((a, b) => {
-        if(a.name > b.name){
-            return 1
-        } else if (a.name < b.name){
-            return -1
-        }
-        return 0
-    })
-
-    console.log(sortedTest)
-
-
     return (
         <TaskPageWrapper>
             <Container>
@@ -64,15 +57,22 @@ const TasksPage = () => {
                         <h2>After the deadline</h2>
                         <div style={{ marginBottom: "10px" }}>
                             sort by:{" "}
-                            <select>
-                                <option>name</option>
-                                <option>date of create</option>
-                                <option>deadline time</option>
-                                <option>priority level</option>
-                                <option>favorite</option>
+                            <select
+                                name="afterTheDeadline"
+                                value={sortOption.afterTheDeadline}
+                                onChange={handleChangeSelect}
+                            >
+                                {sortOptions.map((item) => (
+                                    <option
+                                        key={`afterTheDeadline ${item}`}
+                                        value={item}
+                                    >
+                                        {item}
+                                    </option>
+                                ))}
                             </select>
                         </div>
-                        {sortTasks("date of create", afterDeadlineTasks)?.map(
+                        {sortTasks(sortOption.afterTheDeadline, afterDeadlineTasks)?.map(
                             (item) => (
                                 <TaskCart
                                     key={item.id}
@@ -94,15 +94,22 @@ const TasksPage = () => {
                         <h2>In progress</h2>
                         <div style={{ marginBottom: "10px" }}>
                             sort by:{" "}
-                            <select>
-                                <option>name</option>
-                                <option>date of create</option>
-                                <option>deadline time</option>
-                                <option>priority level</option>
-                                <option>favorite</option>
+                            <select
+                                name="inProgress"
+                                value={sortOption.inProgress}
+                                onChange={handleChangeSelect}
+                            >
+                                {sortOptions.map((item) => (
+                                    <option
+                                        key={`inProgress ${item}`}
+                                        value={item}
+                                    >
+                                        {item}
+                                    </option>
+                                ))}
                             </select>
                         </div>
-                        {sortTasks("priority level", inProgressTasks)?.map(
+                        {sortTasks(sortOption.inProgress, inProgressTasks)?.map(
                             (item) => (
                                 <TaskCart
                                     key={item.id}
@@ -123,15 +130,19 @@ const TasksPage = () => {
                         <h2>Completed</h2>
                         <div style={{ marginBottom: "10px" }}>
                             sort by:{" "}
-                            <select>
-                                <option>name</option>
-                                <option>date of create</option>
-                                <option>deadline time</option>
-                                <option>priority level</option>
-                                <option>favorite</option>
+                            <select
+                                name="completed"
+                                value={sortOption.completed}
+                                onChange={handleChangeSelect}
+                            >
+                                {sortOptions.map((item) => (
+                                    <option key={`completed ${item}`} value={item}>
+                                        {item}
+                                    </option>
+                                ))}
                             </select>
                         </div>
-                        {sortTasks("favorite", completedTasks)?.map((item) => (
+                        {sortTasks(sortOption.inProgress, completedTasks)?.map((item) => (
                             <TaskCart
                                 key={item.id}
                                 id={item.id}

@@ -28,6 +28,20 @@ export const sortTasks = (type: string, tasks: taskProps[]) => {
                 return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
             })
         }
+        if(type === "deadline time"){
+            sortedTasks = tasks.sort((a, b) => {
+                if(a.deadline && b.deadline){
+                    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
+                }
+                if(a.deadline && !b.deadline){
+                    return -1
+                }
+                if(!a.deadline && b.deadline){
+                    return 1
+                }
+                return 0
+            })
+        }
         if(type === "priority level"){
             sortedTasks = tasks.sort((a, b) => {
                 return priorityNumber[b.priority] - priorityNumber[a.priority]
