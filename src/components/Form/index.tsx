@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from "./../Button/index";
 
 type FormModel = {
+    id?: string;
     title: string;
     category: string;
     note: string;
@@ -19,6 +20,8 @@ type FormModel = {
         | "medium priority"
         | "high priority";
     favorite: boolean;
+    createdAt?: string;
+    completed?: boolean
 };
 
 const categoryOptions = [
@@ -56,8 +59,12 @@ const priorityOptions = [
     }
 ]
 
-const TaskForm = () => {
-    const { AddTask, setSuccessStatus } = useTasksContext();
+type TaskFormProps = {
+    taskValues?: FormModel;
+}
+
+const TaskForm = ({taskValues}: TaskFormProps) => {
+    const { AddTask, EditTask, setSuccessStatus } = useTasksContext();
 
     const validationSchema = Yup.object({
         title: Yup.string().required("Hey! I can't add your task if you leave this field empty")
@@ -65,47 +72,70 @@ const TaskForm = () => {
 
     let navigate = useNavigate()
 
+    let initValues: FormModel;
+
+    if(taskValues){
+        initValues = taskValues
+    } else {
+        initValues = {
+            title: "",
+            category: "default",
+            note: "",
+            deadline: undefined,
+            priority: "no priority",
+            favorite: false,
+        };
+    }
+
 
     return (
         <Formik<FormModel>
-            initialValues={{
-                title: "",
-                category: "default",
-                note: "",
-                deadline: undefined,
-                priority: "no priority",
-                favorite: false,
-            }}
-
+            initialValues={initValues}
             validationSchema={validationSchema}
-
             onSubmit={(values) => {
-                AddTask({
-                    id: uuidv4(),
-                    title: values.title,
-                    category: values.category,
-                    note: values.note,
-                    priority: values.priority,
-                    createdAt: new Date().toISOString(),
-                    deadline: values.deadline,
-                    favorite: values.favorite,
-                    completed: false,
-                });
-                navigate("./success")
-                setSuccessStatus()
+                if(taskValues){
+                    EditTask({
+                        id: initValues.id ? initValues.id : uuidv4(),
+                        title: values.title,
+                        category: values.category,
+                        note: values.note,
+                        priority: values.priority,
+                        createdAt: initValues.createdAt
+                            ? initValues.createdAt
+                            : new Date().toISOString(),
+                        deadline: values.deadline,
+                        favorite: values.favorite,
+                        completed: false,
+                    });
+                    navigate("./success");
+                    setSuccessStatus();
+                }else {
+                    AddTask({
+                        id: uuidv4(),
+                        title: values.title,
+                        category: values.category,
+                        note: values.note,
+                        priority: values.priority,
+                        createdAt: new Date().toISOString(),
+                        deadline: values.deadline,
+                        favorite: values.favorite,
+                        completed: false,
+                    });
+                    navigate("./success");
+                    setSuccessStatus();
+                }
             }}
-
         >
-            {({ handleSubmit, values, handleChange, setFieldValue, errors }) => {
-
-                const dateOnChange = (
-                    date: string
-                ) => {
+            {({
+                handleSubmit,
+                values,
+                handleChange,
+                setFieldValue,
+                errors,
+            }) => {
+                const dateOnChange = (date: string) => {
                     if (date) {
-                        setFieldValue(
-                            "deadline",
-                            new Date(date).toISOString()
-                        );
+                        setFieldValue("deadline", new Date(date).toISOString());
                     } else {
                         setFieldValue("deadline", undefined);
                     }
@@ -179,13 +209,17 @@ const TaskForm = () => {
                             isLabel={true}
                             labelText="favorite?"
                             labeltype="checkbox"
-                            onChangeInputHandler={(e: React.ChangeEvent<HTMLInputElement>) => checkboxOnChange(e)}
+                            onChangeInputHandler={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => checkboxOnChange(e)}
                         />
                         <Button
                             buttontype="square"
                             onClickHandler={handleSubmit}
                             size="100%"
-                        >Add task</Button>
+                        >
+                            Add task
+                        </Button>
                     </Wrapper>
                 );
             }}

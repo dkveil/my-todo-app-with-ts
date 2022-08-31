@@ -53,8 +53,9 @@ const TasksPage = () => {
             else return null
         })
 
+    const wrappers = [afterDeadlineTasks, inProgressTasks, afterDeadlineTasks]
+
     React.useEffect(() => {
-        const wrappers = [afterDeadlineTasks, inProgressTasks, afterDeadlineTasks]
 
         wrappers.forEach(item => {
             if(item.length > 0){
@@ -62,9 +63,7 @@ const TasksPage = () => {
             }
         })
 
-    }, [afterDeadlineTasks, inProgressTasks, completedTasks])
-
-    console.log(Math.floor(100 / 3))
+    }, [tasks])
 
     return (
         <TaskPageWrapper>

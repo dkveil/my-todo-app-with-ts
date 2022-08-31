@@ -1,4 +1,3 @@
-import React from "react";
 import * as Cart from './TaskCart.styles'
 import { useTasksContext } from './../../context/TasksContext';
 import { MdDone } from 'react-icons/md'
@@ -9,6 +8,7 @@ import { formatToDate } from "../../utils/isoFormatToDate.util";
 import { AiFillStar } from 'react-icons/ai'
 import { IoCloseOutline } from 'react-icons/io5'
 import Button from '../Button'
+import { useNavigate } from 'react-router-dom';
 
 type TaskCartProps = {
     id: string;
@@ -26,9 +26,9 @@ type TaskCartProps = {
 const TaskCart = ({id, title, category, note, priority, createAt, deadline, favorite, completed, afterdeadline}: TaskCartProps) => {
 
     const { changeStatusTask } = useTasksContext()
+    const navigate = useNavigate()
 
     let icon = completed ? <MdDone /> : (afterdeadline ? <BsExclamationLg /> : <GrInProgress />);
-
 
     return (
         <Cart.Wrapper onClick={() => console.log(Number(title))}>
@@ -44,7 +44,9 @@ const TaskCart = ({id, title, category, note, priority, createAt, deadline, favo
                                 style={{ fontSize: "26px", color: "#bd9800" }}
                             />
                         ) : null}
-                        <HiOutlineDotsHorizontal />
+                        <HiOutlineDotsHorizontal
+                            onClick={() => navigate(`../edit-task/${id}`)}
+                        />
                     </span>
                 </div>
                 <div>

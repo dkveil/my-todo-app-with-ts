@@ -25,6 +25,7 @@ type TasksContextTypes = {
     tasks: taskProps[];
     numberOfTask: number;
     AddTask: (task: taskProps) => void;
+    EditTask: (task: taskProps) => void;
     addingStatusSuccess: boolean;
     setSuccessStatus: () => void;
     changeStatusTask: (id: string) => void;
@@ -93,6 +94,13 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
         });
     }
 
+    const EditTask = (task: taskProps) => {
+        dispatch({
+            type: "EDIT",
+            task
+        })
+    }
+
     const changeStatusTask = (id: string) => {
         const task = tasks.find(item => item.id === id)
 
@@ -110,6 +118,7 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
                 tasks,
                 numberOfTask,
                 AddTask,
+                EditTask,
                 addingStatusSuccess,
                 setSuccessStatus,
                 changeStatusTask

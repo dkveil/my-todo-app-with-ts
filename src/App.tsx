@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import TasksPage from "./pages/TasksPage";
 import AddTaskPage from "./pages/AddTaskPage";
+import EditTaskPage from "./pages/EditTaskPage";
 import GlobalContextProvider from "./context/GlobalContext";
 import TasksContextProvider from "./context/TasksContext";
 
@@ -23,13 +24,14 @@ const App = () => {
                         <NavbarCart />
                         <AppWrapper>
                             <Navbar />
-                            <Header/>
+                            <Header />
                             <Routes>
                                 <Route path="/" element={<HomePage />} />
                                 <Route path="/about" element={<AboutPage />} />
                                 <Route path="/tasks" element={<TasksPage />} />
                                 <Route path="/add-task" element={<AddTaskPage />}/>
                                 <Route path="/add-task/:status" element={<AddTaskPage />}/>
+                                <Route path="/edit-task/:id" element={<EditTaskPage />}/>
                             </Routes>
                         </AppWrapper>
                     </Wrapper>
