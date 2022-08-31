@@ -25,7 +25,7 @@ type TaskCartProps = {
 
 const TaskCart = ({id, title, category, note, priority, createAt, deadline, favorite, completed, afterdeadline}: TaskCartProps) => {
 
-    const { changeStatusTask } = useTasksContext()
+    const { changeStatusTask, DeleteTask } = useTasksContext()
     const navigate = useNavigate()
 
     let icon = completed ? <MdDone /> : (afterdeadline ? <BsExclamationLg /> : <GrInProgress />);
@@ -47,23 +47,35 @@ const TaskCart = ({id, title, category, note, priority, createAt, deadline, favo
                         <HiOutlineDotsHorizontal
                             onClick={() => navigate(`../edit-task/${id}`)}
                         />
+                        <IoCloseOutline
+                            onClick={() => DeleteTask(id)}
+                        />
                     </span>
                 </div>
                 <div>
                     <span>{category}</span>
-                    {deadline ? <span style={{color: "red", fontWeight: "bold"}}>to {formatToDate(deadline)}</span> : null}
+                    {deadline ? (
+                        <span style={{ color: "red", fontWeight: "bold" }}>
+                            to {formatToDate(deadline)}
+                        </span>
+                    ) : null}
                 </div>
             </Cart.Title>
             <Cart.Content isNote={Boolean(note)}>
                 {note ? <>{note}</> : "any note to this task"}
             </Cart.Content>
             <div>
-                <div style={{ fontSize: ".9rem" }} onClick={() => console.log(Boolean(note))}>
+                <div
+                    style={{ fontSize: ".9rem" }}
+                    onClick={() => console.log(Boolean(note))}
+                >
                     created at: {formatToDate(createAt)}
                 </div>
                 {priority !== "no priority" ? (
                     <div>
-                        <Cart.Priority level={priority}>{priority}</Cart.Priority>
+                        <Cart.Priority level={priority}>
+                            {priority}
+                        </Cart.Priority>
                     </div>
                 ) : null}
                 <Button

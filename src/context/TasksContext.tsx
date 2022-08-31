@@ -26,6 +26,7 @@ type TasksContextTypes = {
     numberOfTask: number;
     AddTask: (task: taskProps) => void;
     EditTask: (task: taskProps) => void;
+    DeleteTask: (id: string) => void;
     addingStatusSuccess: boolean;
     editingStatusSuccess: boolean;
     setAddingSuccessStatus: () => void;
@@ -75,25 +76,24 @@ export const useTasksContext = () => React.useContext(TasksContext);
 const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const params = useParams()
-    console.log(params.id)
 
     const [tasks, dispatch] = React.useReducer(taskReducer, [])
-    const [addingStatusSuccess, setAddingStatusSucces] = React.useState<boolean>(false)
-    const [editingStatusSuccess, setEditingStatusSucces] = React.useState<boolean>(false)
+    const [addingStatusSuccess, setAddingStatusSuccess] = React.useState<boolean>(false)
+    const [editingStatusSuccess, setEditingStatusSuccess] = React.useState<boolean>(false)
 
     const numberOfTask = tasks.length;
 
     const location = useLocation()
 
-    const setAddingSuccessStatus = () => setAddingStatusSucces(true);
-    const setEditingSuccessStatus = () => setEditingStatusSucces(true);
+    const setAddingSuccessStatus = () => setAddingStatusSuccess(true);
+    const setEditingSuccessStatus = () => setEditingStatusSuccess(true);
 
     React.useEffect(() => {
         if(location.pathname !== "/add-task/success"){
-            setAddingStatusSucces(false)
+            setAddingStatusSuccess(false)
         }
         if(params.id && params.status){
-            setEditingStatusSucces(false)
+            setEditingStatusSuccess(false)
         }
     }, [location.pathname, params])
 
@@ -109,6 +109,17 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
             type: "EDIT",
             task
         })
+    }
+
+    const DeleteTask = (id: string) => {
+        const task = tasks.find((item) => item.id === id);
+
+        if(task){
+            dispatch({
+                type: "REMOVE",
+                task
+            })
+        }
     }
 
     const changeStatusTask = (id: string) => {
@@ -129,6 +140,7 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
                 numberOfTask,
                 AddTask,
                 EditTask,
+                DeleteTask,
                 addingStatusSuccess,
                 editingStatusSuccess,
                 setAddingSuccessStatus,

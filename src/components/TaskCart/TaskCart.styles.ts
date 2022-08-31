@@ -38,26 +38,7 @@ export const Title = styled.div`
                 gap: 2px;
             }
             :nth-child(2){
-                position: relative;
                 cursor: pointer;
-
-                :hover:before{
-                    opacity: 1;
-                    visibility: visible;
-                }
-
-                :before{
-                    content: attr(data-hover);
-                    font-size: .8rem;
-                    visibility: hidden;
-                    opacity: 0;
-                    position: absolute;
-                    width: fit-content;
-                    z-index: 1;
-                    top: 80%;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
             }
         }
 

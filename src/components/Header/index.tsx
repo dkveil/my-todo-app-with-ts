@@ -7,7 +7,6 @@ const Header = () => {
     const { numberOfTask } = useTasksContext()
 
     const location = useLocation()
-    // const params = useParams()
 
     if(location.pathname === '/' || !location.pathname){
         return <H.Wrapper>homePage</H.Wrapper>
