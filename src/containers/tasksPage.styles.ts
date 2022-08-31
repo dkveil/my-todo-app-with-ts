@@ -14,6 +14,8 @@ export const TaskPageContent = styled.div`
     }
 `
 
+
+
 export const TasksWrapper = styled.div`
     width: 100%;
     border-radius: 10px;
@@ -28,6 +30,5 @@ export const TasksWrapper = styled.div`
 
     ${({theme}) => theme.mq.desktop}{
         padding: 10px 5px;
-        width: 33%;
     }
 `
