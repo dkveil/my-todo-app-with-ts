@@ -31,7 +31,7 @@ const TaskCart = ({id, title, category, note, priority, createAt, deadline, favo
 
 
     return (
-        <Cart.Wrapper>
+        <Cart.Wrapper onClick={() => console.log(Number(title))}>
             <Cart.Title>
                 <div>
                     <span>

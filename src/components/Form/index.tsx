@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import { useTasksContext } from "../../context/TasksContext";
 import { v4 as uuidv4 } from "uuid";
-import {Wrapper, Button as Btn} from "./Form.styles";
+import {Wrapper} from "./Form.styles";
 import FormField from './FormField'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom';

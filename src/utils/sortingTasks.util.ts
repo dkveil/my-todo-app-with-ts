@@ -12,6 +12,15 @@ export const sortTasks = (type: string, tasks: taskProps[]) => {
 
     if(tasks){
         if(type === "name"){
+            sortedTasks = tasks.sort((a, b) => {
+                if(a.title > b.title){
+                    return 1
+                }
+                if(a.title < b.title){
+                    return -1
+                }
+                return 0
+            })
         }
 
         if(type === "date of create"){
@@ -25,7 +34,15 @@ export const sortTasks = (type: string, tasks: taskProps[]) => {
             })
         }
         if(type === "favorite"){
-
+            sortedTasks = tasks.sort((a, b) => {
+                if(!a.favorite && b.favorite){
+                    return 1
+                }
+                if(a.favorite && !b.favorite){
+                    return -1
+                }
+                return 0
+            })
         }
     }
 
