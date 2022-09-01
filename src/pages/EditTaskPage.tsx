@@ -4,6 +4,7 @@ import TaskForm from "../components/Form";
 import { useTasksContext } from "../context/TasksContext";
 import SuccesBoard from "../components/SuccesBoard";
 import { Container } from "../containers/container";
+import { motion } from "framer-motion"
 
 const EditTaskPage = () => {
 
@@ -13,11 +14,19 @@ const EditTaskPage = () => {
     const task = tasks.find(item => item.id === params.id)
 
     return (
-        <section>
+        <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <Container>
-                {params.status === "success" ? <SuccesBoard/> : <TaskForm taskValues={task} />}
+                {params.status === "success" ? (
+                    <SuccesBoard />
+                ) : (
+                    <TaskForm taskValues={task} />
+                )}
             </Container>
-        </section>
+        </motion.section>
     );
 }
 

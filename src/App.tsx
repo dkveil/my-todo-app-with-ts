@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import GlobalStyles from "./styles/global";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import NavbarCart from "./components/NavbarCart";
 import Navbar from "./components/Navbar/index";
 import { Wrapper, AppWrapper } from "./containers/container";
@@ -13,8 +13,12 @@ import AddTaskPage from "./pages/AddTaskPage";
 import EditTaskPage from "./pages/EditTaskPage";
 import GlobalContextProvider from "./context/GlobalContext";
 import TasksContextProvider from "./context/TasksContext";
+import { AnimatePresence } from 'framer-motion'
 
 const App = () => {
+
+    const location = useLocation()
+
     return (
         <GlobalContextProvider>
             <TasksContextProvider>
@@ -25,15 +29,17 @@ const App = () => {
                         <AppWrapper>
                             <Navbar />
                             <Header />
-                            <Routes>
-                                <Route path="/" element={<HomePage />} />
-                                <Route path="/about" element={<AboutPage />} />
-                                <Route path="/tasks" element={<TasksPage />} />
-                                <Route path="/add-task" element={<AddTaskPage />}/>
-                                <Route path="/add-task/:status" element={<AddTaskPage />}/>
-                                <Route path="/edit-task/:id/" element={<EditTaskPage />}/>
-                                <Route path="/edit-task/:id/:status" element={<EditTaskPage />}/>
-                            </Routes>
+                            <AnimatePresence>
+                                <Routes>
+                                    <Route path="/" element={<HomePage />} />
+                                    <Route path="/about" element={<AboutPage />} />
+                                    <Route path="/tasks" element={<TasksPage />} />
+                                    <Route path="/add-task" element={<AddTaskPage />}/>
+                                    <Route path="/add-task/:status" element={<AddTaskPage />}/>
+                                    <Route path="/edit-task/:id/" element={<EditTaskPage />}/>
+                                    <Route path="/edit-task/:id/:status" element={<EditTaskPage />}/>
+                                </Routes>
+                            </AnimatePresence>
                         </AppWrapper>
                     </Wrapper>
                 </ThemeProvider>
