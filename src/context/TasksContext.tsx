@@ -77,9 +77,15 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const params = useParams()
 
-    const [tasks, dispatch] = React.useReducer(taskReducer, [])
+    const initialState = localStorage.getItem("tasks")
+
+    const [tasks, dispatch] = React.useReducer(taskReducer, initialState ? JSON.parse(initialState) : [])
     const [addingStatusSuccess, setAddingStatusSuccess] = React.useState<boolean>(false)
     const [editingStatusSuccess, setEditingStatusSuccess] = React.useState<boolean>(false)
+
+    React.useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks))
+    }, [tasks])
 
     const numberOfTask = tasks.length;
 
@@ -87,6 +93,7 @@ const TasksContextProvider = ({ children }: TasksContextProviderProps) => {
 
     const setAddingSuccessStatus = () => setAddingStatusSuccess(true);
     const setEditingSuccessStatus = () => setEditingStatusSuccess(true);
+
 
     React.useEffect(() => {
         if(location.pathname !== "/add-task/success"){
