@@ -56,7 +56,7 @@ const TaskCart = ({id, title, category, note, priority, createAt, deadline, favo
                     <span>{category}</span>
                     {deadline ? (
                         <span style={{ color: "red", fontWeight: "bold" }}>
-                            to {formatToDate(deadline)}
+                            deadline: {formatToDate(deadline)}
                         </span>
                     ) : null}
                 </div>

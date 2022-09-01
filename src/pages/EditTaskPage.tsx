@@ -12,8 +12,6 @@ const EditTaskPage = () => {
 
     const task = tasks.find(item => item.id === params.id)
 
-    console.log(params)
-
     return (
         <section>
             <Container>

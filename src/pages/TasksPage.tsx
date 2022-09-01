@@ -10,6 +10,7 @@ import {
 import { sortTasks } from "../utils/sortingTasks.util";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
+import { useLocalStorage } from "../hooks/useLocalStorage.hook";
 
 const sortOptions = [
     "name",
@@ -23,7 +24,7 @@ const TasksPage = () => {
     const Now = new Date();
     const navigate = useNavigate();
     const { tasks } = useTasksContext();
-    const [sortOption, setSortOption] = React.useState({
+    const [sortOption, setSortOption] = useLocalStorage("task options",{
         afterTheDeadline: "date of create",
         inProgress: "date of create",
         completed: "date of create",
