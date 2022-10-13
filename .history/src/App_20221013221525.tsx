@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import GlobalStyles from "./styles/global";
-import { Routes, Route, Navigate} from "react-router";
+import { Routes, Route, useLocation, Navigate} from "react-router";
 import NavbarCart from "./components/NavbarCart";
 import Navbar from "./components/Navbar/index";
 import { Wrapper, AppWrapper } from "./containers/container";

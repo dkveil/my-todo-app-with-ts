@@ -1,5 +1,7 @@
 import * as NavCart from './NavbarCart.styles'
 import {
+    AiOutlineHome,
+    AiOutlineInfoCircle,
     AiOutlineFolderOpen,
     AiOutlinePlusCircle,
 } from "react-icons/ai";

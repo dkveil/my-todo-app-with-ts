@@ -1,11 +1,23 @@
 import * as NavCart from './NavbarCart.styles'
 import {
+    AiOutlineHome,
+    AiOutlineInfoCircle,
     AiOutlineFolderOpen,
     AiOutlinePlusCircle,
 } from "react-icons/ai";
 import { useGlobalContext } from '../../context/GlobalContext';
 
 const navitems = [
+    {
+        name: "Home",
+        path: "/",
+        icon: <AiOutlineHome style={{ marginRight: "10px" }} />,
+    },
+    {
+        name: "About",
+        path: "/about",
+        icon: <AiOutlineInfoCircle style={{ marginRight: "10px" }} />,
+    },
     {
         name: "Tasks",
         path: "/tasks",

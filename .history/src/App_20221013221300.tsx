@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import GlobalStyles from "./styles/global";
-import { Routes, Route, Navigate} from "react-router";
+import { Routes, Route, useLocation, redirect } from "react-router";
 import NavbarCart from "./components/NavbarCart";
 import Navbar from "./components/Navbar/index";
 import { Wrapper, AppWrapper } from "./containers/container";
@@ -15,6 +15,8 @@ import { AnimatePresence } from 'framer-motion'
 
 const App = () => {
 
+    const location = useLocation()
+
     return (
         <GlobalContextProvider>
             <TasksContextProvider>
@@ -27,7 +29,9 @@ const App = () => {
                             <Header />
                             <AnimatePresence>
                                 <Routes>
-                                    <Route path="/" element={<Navigate to='/tasks'/>}/>
+                                    <Route path="/">
+                                        {redirect("/tasks")}
+                                    </Route>
                                     <Route path="/tasks" element={<TasksPage />} />
                                     <Route path="/add-task" element={<AddTaskPage />}/>
                                     <Route path="/add-task/:status" element={<AddTaskPage />}/>
